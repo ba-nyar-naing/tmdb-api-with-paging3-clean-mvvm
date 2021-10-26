@@ -1,4 +1,4 @@
-package com.banyar.tmdb_api_with_paging3_clean_mvvm
+package com.banyar.presentation
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.banyar.tmdb_api_with_paging3_clean_mvvm", appContext.packageName)
+        assertEquals("com.banyar.presentation", appContext.packageName)
     }
 }

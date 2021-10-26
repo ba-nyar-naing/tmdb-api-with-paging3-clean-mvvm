@@ -1,4 +1,4 @@
-package com.banyar.tmdb_api_with_paging3_clean_mvvm
+package com.banyar.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
