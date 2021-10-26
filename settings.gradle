@@ -5,7 +5,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "TMDB API with Paging3 Clean MVVM"
+rootProject.name = "tmdb-showcase"
 
 include ':presentation'
 include ':domain'
