@@ -20,6 +20,17 @@ object CommonLibs {
     const val timber = "com.jakewharton.timber:timber:4.7.1"
 }
 
+object DaggerHilt {
+    const val android = "com.google.dagger:hilt-android:2.38.1"
+    const val androidCompiler = "com.google.dagger:hilt-android-compiler:2.38.1"
+    const val compiler = "com.google.dagger:hilt-compiler:2.38.1"
+}
+
+object AndroidXHilt {
+    const val lifecycle = "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
+    const val compiler = "androidx.hilt:hilt-compiler:1.0.0"
+}
+
 object AndroidXCore {
     const val coreKtx = "androidx.core:core-ktx:1.6.0"
 }
@@ -32,6 +43,9 @@ object AndroidXConstraintLayout {
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:2.1.1"
 }
 
+object AndroidXFragment {
+    const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.6"
+}
 object Material {
     const val material = "com.google.android.material:material:1.4.0"
 }

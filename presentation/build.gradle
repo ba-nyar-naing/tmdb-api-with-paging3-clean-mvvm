@@ -1,5 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     defaultConfig {
@@ -8,7 +10,7 @@ android {
         compileSdk BuildConfig.targetSdk
         targetSdk BuildConfig.targetSdk
         minSdk BuildConfig.minSdk
-        
+
         versionCode BuildConfig.versionCode
         versionName BuildConfig.versionName
 
@@ -28,15 +30,26 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+    buildFeatures {
+        viewBinding true
+    }
 }
 
 dependencies {
-
     implementation AndroidXCore.coreKtx
     implementation AndroidXAppCompat.appCompat
-    implementation Material.material
     implementation AndroidXConstraintLayout.constraintLayout
+    implementation AndroidXFragment.fragmentKtx
+    implementation Material.material
+
     implementation CommonLibs.timber
+
+    implementation AndroidXHilt.lifecycle
+    kapt AndroidXHilt.compiler
+
+    implementation DaggerHilt.android
+    kapt DaggerHilt.compiler
+    kapt DaggerHilt.androidCompiler
 
     testImplementation CommonLibs.junit
 
