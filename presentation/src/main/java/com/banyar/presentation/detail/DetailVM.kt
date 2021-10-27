@@ -1,4 +1,4 @@
-package com.banyar.presentation.home
+package com.banyar.presentation.detail
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
@@ -9,19 +9,19 @@ import timber.log.Timber
 import javax.inject.Inject
 
 @HiltViewModel
-class HomeVM @Inject constructor(
+class DetailVM @Inject constructor(
     private val savedStateHandle: SavedStateHandle,
-    private val repository: HomeRepository<HomeContract.IViewModel>
-) : BaseViewModel(), HomeContract.IViewModel {
+    private val repository: DetailRepository<DetailContract.IViewModel>
+) : BaseViewModel(), DetailContract.IViewModel {
 
     init {
         repository.onAttach(this)
     }
 
-    override fun getPopularMovies() {
-        Timber.d("getPopularMovies: ")
+    override fun getMovieDetail() {
+        Timber.d("getMovieDetail: ")
         viewModelScope.launch {
-            repository.getPopularMovies()
+            repository.getMovieDetail()
         }
     }
 
