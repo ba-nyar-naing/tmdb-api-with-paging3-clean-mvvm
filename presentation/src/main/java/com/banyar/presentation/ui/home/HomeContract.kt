@@ -1,6 +1,6 @@
-package com.banyar.presentation.home
+package com.banyar.presentation.ui.home
 
-import com.banyar.presentation.base.BaseContract
+import com.banyar.presentation.ui.base.BaseContract
 
 object HomeContract {
 

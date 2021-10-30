@@ -1,4 +1,4 @@
-package com.banyar.presentation.base
+package com.banyar.presentation.ui.base
 
 import androidx.appcompat.app.AppCompatActivity
 import dagger.hilt.android.AndroidEntryPoint

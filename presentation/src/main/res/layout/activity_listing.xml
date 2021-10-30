@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".listing.ListingActivity">
+    tools:context=".ui.listing.ListingActivity">
 
     <Button
         android:id="@+id/btn_do_action"

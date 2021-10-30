@@ -1,8 +1,8 @@
-package com.banyar.presentation.listing
+package com.banyar.presentation.ui.listing
 
 import androidx.lifecycle.viewModelScope
 import com.banyar.domain.usecase.GetPopularUC
-import com.banyar.presentation.base.BaseViewModel
+import com.banyar.presentation.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

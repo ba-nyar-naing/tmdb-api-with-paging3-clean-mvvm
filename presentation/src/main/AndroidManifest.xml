@@ -12,13 +12,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TMDBAPIWithPaging3CleanMVVM">
         <activity
-            android:name=".listing.ListingActivity"
+            android:name="com.banyar.presentation.ui.listing.ListingActivity"
             android:exported="true" />
         <activity
-            android:name=".detail.DetailActivity"
+            android:name="com.banyar.presentation.ui.detail.DetailActivity"
             android:exported="true" />
         <activity
-            android:name=".home.HomeActivity"
+            android:name="com.banyar.presentation.ui.home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,21 +1,20 @@
-package com.banyar.presentation.detail
+package com.banyar.presentation.ui.listing
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.banyar.presentation.base.BaseActivity
-import com.banyar.presentation.databinding.ActivityDetailBinding
-import com.banyar.presentation.home.HomeVM
+import com.banyar.presentation.ui.base.BaseActivity
+import com.banyar.presentation.databinding.ActivityListingBinding
 import timber.log.Timber
 
-class DetailActivity : BaseActivity() {
+class ListingActivity : BaseActivity() {
 
-    private lateinit var binding: ActivityDetailBinding
+    private lateinit var binding: ActivityListingBinding
 
-    private val viewModel: DetailVM by viewModels()
+    private val viewModel: ListingVM by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityDetailBinding.inflate(layoutInflater)
+        binding = ActivityListingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         setupObserver()
@@ -25,7 +24,6 @@ class DetailActivity : BaseActivity() {
 
     override fun setupUIElements() {
         Timber.d("setupUIElements: Not yet implemented")
-        viewModel.getMovieDetail()
     }
 
     override fun setupObserver() {
@@ -33,6 +31,8 @@ class DetailActivity : BaseActivity() {
     }
 
     override fun setupActionListener() {
-        Timber.d("setupActionListener: Not yet implemented")
+        binding.btnDoAction.setOnClickListener {
+            viewModel.getPopularMovies()
+        }
     }
 }

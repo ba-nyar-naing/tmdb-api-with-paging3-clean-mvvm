@@ -1,7 +1,7 @@
-package com.banyar.presentation.home
+package com.banyar.presentation.ui.home
 
 import androidx.lifecycle.viewModelScope
-import com.banyar.presentation.base.BaseViewModel
+import com.banyar.presentation.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import timber.log.Timber

@@ -1,6 +1,6 @@
-package com.banyar.presentation.home
+package com.banyar.presentation.ui.home
 
-import com.banyar.presentation.base.BaseRepository
+import com.banyar.presentation.ui.base.BaseRepository
 import timber.log.Timber
 import javax.inject.Inject
 

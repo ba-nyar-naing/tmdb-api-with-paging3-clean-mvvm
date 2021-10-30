@@ -1,6 +1,6 @@
-package com.banyar.presentation.detail
+package com.banyar.presentation.ui.detail
 
-import com.banyar.presentation.base.BaseContract
+import com.banyar.presentation.ui.base.BaseContract
 
 object DetailContract {
 

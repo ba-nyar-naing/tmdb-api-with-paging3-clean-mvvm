@@ -1,13 +1,13 @@
-package com.banyar.presentation.home
+package com.banyar.presentation.ui.home
 
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.banyar.presentation.base.BaseActivity
+import com.banyar.presentation.ui.base.BaseActivity
 import com.banyar.presentation.databinding.ActivityHomeBinding
-import com.banyar.presentation.detail.DetailActivity
-import com.banyar.presentation.listing.ListingActivity
+import com.banyar.presentation.ui.detail.DetailActivity
+import com.banyar.presentation.ui.listing.ListingActivity
 import timber.log.Timber
 
 class HomeActivity : BaseActivity() {
