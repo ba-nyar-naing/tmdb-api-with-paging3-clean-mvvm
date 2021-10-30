@@ -36,6 +36,9 @@ android {
 }
 
 dependencies {
+    implementation project(':domain')
+    implementation project(':data-remote')
+
     implementation AndroidXCore.coreKtx
     implementation AndroidXAppCompat.appCompat
     implementation AndroidXConstraintLayout.constraintLayout
@@ -45,14 +48,17 @@ dependencies {
     implementation CommonLibs.timber
 
     implementation AndroidXHilt.lifecycle
-    implementation 'androidx.appcompat:appcompat:1.3.1'
-    implementation 'com.google.android.material:material:1.4.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.1'
     kapt AndroidXHilt.compiler
 
     implementation DaggerHilt.android
     kapt DaggerHilt.compiler
     kapt DaggerHilt.androidCompiler
+
+    implementation Retrofit.retrofit
+    implementation Retrofit.moshi
+    implementation Retrofit.logging
+
+    implementation Chuck.chuck
 
     testImplementation CommonLibs.junit
 

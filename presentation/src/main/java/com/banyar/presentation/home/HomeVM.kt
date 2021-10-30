@@ -1,6 +1,5 @@
 package com.banyar.presentation.home
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
 import com.banyar.presentation.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -10,7 +9,6 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeVM @Inject constructor(
-    private val savedStateHandle: SavedStateHandle,
     private val repository: HomeRepository<HomeContract.IViewModel>
 ) : BaseViewModel(), HomeContract.IViewModel {
 

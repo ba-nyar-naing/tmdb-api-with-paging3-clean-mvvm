@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import com.banyar.presentation.base.BaseActivity
 import com.banyar.presentation.databinding.ActivityHomeBinding
 import com.banyar.presentation.detail.DetailActivity
+import com.banyar.presentation.listing.ListingActivity
 import timber.log.Timber
 
 class HomeActivity : BaseActivity() {
@@ -41,6 +42,10 @@ class HomeActivity : BaseActivity() {
 
         binding.btnOpenDetail.setOnClickListener {
             startActivity(Intent(this, DetailActivity::class.java))
+        }
+
+        binding.btnOpenListing.setOnClickListener {
+            startActivity(Intent(this, ListingActivity::class.java))
         }
     }
 }
