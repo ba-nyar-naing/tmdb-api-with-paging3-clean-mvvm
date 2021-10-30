@@ -2,6 +2,7 @@ package com.banyar.presentation.ui.detail
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import coil.load
 import com.banyar.presentation.ui.base.BaseActivity
 import com.banyar.presentation.databinding.ActivityDetailBinding
 import timber.log.Timber
@@ -23,12 +24,19 @@ class DetailActivity : BaseActivity() {
     }
 
     override fun setupUIElements() {
-        Timber.d("setupUIElements: Not yet implemented")
-        viewModel.getMovieDetail()
+        val movieId = intent.getIntExtra("id", -1)
+        viewModel.getMovieDetails(movieId)
     }
 
     override fun setupObserver() {
-        Timber.d("setupObserver: Not yet implemented")
+        viewModel.movieDetails.observe(this) { movieDetails ->
+            title = movieDetails.title
+
+            with(binding) {
+                txvOverview.text = movieDetails.overview
+                ivPoster.load("https://image.tmdb.org/t/p/w500${movieDetails.posterPath}")
+            }
+        }
     }
 
     override fun setupActionListener() {

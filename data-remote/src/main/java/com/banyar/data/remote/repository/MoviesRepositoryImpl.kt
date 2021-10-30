@@ -2,7 +2,7 @@ package com.banyar.data.remote.repository
 
 import com.banyar.data.remote.api.TMDBApiService
 import com.banyar.data.remote.mapper.toDomain
-import com.banyar.domain.model.Movie
+import com.banyar.domain.model.MovieDetails
 import com.banyar.domain.model.PopularMovies
 import com.banyar.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
@@ -13,10 +13,10 @@ class MoviesRepositoryImpl @Inject constructor(
     private val tmdbService: TMDBApiService
 ) : MoviesRepository {
 
-    override fun getPopular(page: Int): Flow<List<Movie>> = flow {
-        val moviesResponse = tmdbService.getPopular(page)
-        val movies = moviesResponse.results.map { it.toDomain() }
-        emit(movies)
+    override fun getDetails(id: Int): Flow<MovieDetails> = flow {
+        val response = tmdbService.getDetails(id)
+        val movieDetails = response.toDomain()
+        emit(movieDetails)
     }
 
     override fun getPopularMovies(page: Int): Flow<PopularMovies> = flow {

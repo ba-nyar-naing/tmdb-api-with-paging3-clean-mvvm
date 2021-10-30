@@ -1,13 +1,39 @@
 package com.banyar.data.remote.mapper
 
-import com.banyar.data.remote.model.MovieResponse
+import com.banyar.data.remote.model.GenreResponse
+import com.banyar.data.remote.model.MovieDetailsResponse
 import com.banyar.data.remote.model.PopularResponse
-import com.banyar.domain.model.Movie
+import com.banyar.domain.model.Genre
+import com.banyar.domain.model.MovieDetails
 import com.banyar.domain.model.PopularMovies
 
-internal fun MovieResponse.toDomain(): Movie {
-    return Movie(
-        id, title, overview, posterPath, voteCount
+internal fun GenreResponse.toDomain(): Genre {
+    return Genre(id, name)
+}
+
+internal fun MovieDetailsResponse.toDomain(): MovieDetails {
+    return MovieDetails(
+        adult,
+        backdropPath,
+        budget,
+        genres?.map { genre -> genre.toDomain() },
+        homepage,
+        id,
+        imdbId,
+        originalLanguage,
+        originalTitle,
+        overview,
+        popularity,
+        posterPath,
+        releaseDate,
+        revenue,
+        runtime,
+        status,
+        tagline,
+        title,
+        video,
+        voteAverage,
+        voteCount
     )
 }
 

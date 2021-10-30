@@ -6,13 +6,27 @@
     android:layout_height="match_parent"
     tools:context=".ui.detail.DetailActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="32dp"
-        android:text="Detail Screen"
+    <ImageView
+        android:id="@+id/iv_poster"
+        android:layout_width="250dp"
+        android:layout_height="375dp"
+        android:adjustViewBounds="true"
+        android:contentDescription="@string/app_name"
+        android:cropToPadding="true"
+        android:scaleType="fitXY"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/venom" />
+
+    <TextView
+        android:id="@+id/txv_overview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/iv_poster"
+        tools:text="After finding a host body in investigative reporter Eddie Brock, the alien symbiote must face a new enemy, Carnage, the alter ego of serial killer Cletus Kasady." />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

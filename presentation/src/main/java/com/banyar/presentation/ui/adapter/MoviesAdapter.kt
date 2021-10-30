@@ -1,15 +1,17 @@
 package com.banyar.presentation.ui.adapter
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.banyar.domain.model.Movie
+import com.banyar.domain.model.MovieDetails
 import com.banyar.presentation.databinding.ItemImageMovieBinding
+import com.banyar.presentation.ui.detail.DetailActivity
 
-class MoviesAdapter : PagingDataAdapter<Movie, MoviesAdapter.ViewHolder>(DataDiffer) {
+class MoviesAdapter : PagingDataAdapter<MovieDetails, MoviesAdapter.ViewHolder>(DataDiffer) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemImageMovieBinding.inflate(
@@ -26,25 +28,32 @@ class MoviesAdapter : PagingDataAdapter<Movie, MoviesAdapter.ViewHolder>(DataDif
         private val binding: ItemImageMovieBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(movie: Movie) {
+        fun bind(movie: MovieDetails) {
             with(binding) {
                 txvTitle.text = movie.title
                 ivPoster.load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
+
+                val context = root.context
+                root.rootView.setOnClickListener {
+                    val intent = Intent(context, DetailActivity::class.java)
+                    intent.putExtra("id", movie.id)
+                    context.startActivity(intent)
+                }
             }
         }
     }
 
-    object DataDiffer : DiffUtil.ItemCallback<Movie>() {
+    object DataDiffer : DiffUtil.ItemCallback<MovieDetails>() {
         override fun areItemsTheSame(
-            oldItem: Movie,
-            newItem: Movie
+            oldItem: MovieDetails,
+            newItem: MovieDetails
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: Movie,
-            newItem: Movie
+            oldItem: MovieDetails,
+            newItem: MovieDetails
         ): Boolean {
             return oldItem == newItem
         }

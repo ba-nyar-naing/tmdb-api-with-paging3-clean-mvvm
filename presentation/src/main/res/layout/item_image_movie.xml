@@ -16,7 +16,8 @@
         android:cropToPadding="true"
         android:scaleType="fitXY"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@drawable/venom" />
 
     <TextView
         android:id="@+id/txv_title"
@@ -28,6 +29,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/iv_poster"
-        tools:text="Injustice" />
+        tools:text="Venom: Let There Be Carnage" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

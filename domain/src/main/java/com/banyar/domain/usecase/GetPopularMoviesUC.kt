@@ -1,13 +1,15 @@
 package com.banyar.domain.usecase
 
 import androidx.paging.*
-import com.banyar.domain.model.Movie
+import com.banyar.domain.model.MovieDetails
 import com.banyar.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
+import javax.inject.Singleton
 
-typealias GetPopularMoviesBaseUC = BaseUseCase<Any, Flow<PagingData<Movie>>>
+typealias GetPopularMoviesBaseUC = BaseUseCase<Any, Flow<PagingData<MovieDetails>>>
 
+@Singleton
 class GetPopularMoviesUC @Inject constructor(
     private val repository: MoviesRepository
 ) : GetPopularMoviesBaseUC {
@@ -23,11 +25,11 @@ class GetPopularMoviesUC @Inject constructor(
 
 class PopularMoviesPagingSource(
     private val repository: MoviesRepository
-) : PagingSource<Int, Movie>() {
+) : PagingSource<Int, MovieDetails>() {
 
-    override fun getRefreshKey(state: PagingState<Int, Movie>): Int? = state.anchorPosition
+    override fun getRefreshKey(state: PagingState<Int, MovieDetails>): Int? = state.anchorPosition
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Movie> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieDetails> {
         val currentLoadingPageKey = params.key ?: 1
 
         return try {
