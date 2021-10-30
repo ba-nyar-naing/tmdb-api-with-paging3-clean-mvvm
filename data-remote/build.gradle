@@ -9,10 +9,14 @@ java {
 dependencies {
     implementation project(':domain')
 
+    implementation CommonLibs.timber
+
     implementation Retrofit.retrofit
-    implementation Retrofit.moshi
+    implementation Retrofit.gson
 
     implementation DaggerHilt.core
 
     implementation Coroutine.coroutineCore
+
+    implementation Paging3.commonKtx
 }

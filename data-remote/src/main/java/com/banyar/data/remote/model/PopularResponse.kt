@@ -1,16 +1,15 @@
 package com.banyar.data.remote.model
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 
 data class PopularResponse(
-    @Json(name = "page")
+    @SerializedName("page")
     val page: Int,
-    @Json(name = "results")
+    @SerializedName("results")
     val results: List<MovieResponse>,
-    @Json(name = "total_pages")
+    @SerializedName("total_pages")
     val totalPages: Int,
-    @Json(name = "total_results")
+    @SerializedName("total_results")
     val totalResults: Int
 )

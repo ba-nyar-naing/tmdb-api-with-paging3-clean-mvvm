@@ -55,10 +55,14 @@ dependencies {
     kapt DaggerHilt.androidCompiler
 
     implementation Retrofit.retrofit
-    implementation Retrofit.moshi
+    implementation Retrofit.gson
     implementation Retrofit.logging
 
     implementation Chuck.chuck
+
+    implementation Paging3.pagingKtx
+
+    implementation Image.coil
 
     testImplementation CommonLibs.junit
 

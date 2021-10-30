@@ -1,36 +1,35 @@
 package com.banyar.data.remote.model
 
 
-import com.squareup.moshi.Json
-import com.squareup.moshi.JsonClass
+import com.google.gson.annotations.SerializedName
 
 data class MovieResponse(
-    @Json(name = "adult")
+    @SerializedName("adult")
     val adult: Boolean,
-    @Json(name = "backdrop_path")
+    @SerializedName("backdrop_path")
     val backdropPath: String,
-    @Json(name = "genre_ids")
+    @SerializedName("genre_ids")
     val genreIds: List<Int>,
-    @Json(name = "id")
+    @SerializedName("id")
     val id: Int,
-    @Json(name = "original_language")
+    @SerializedName("original_language")
     val originalLanguage: String,
-    @Json(name = "original_title")
+    @SerializedName("original_title")
     val originalTitle: String,
-    @Json(name = "overview")
+    @SerializedName("overview")
     val overview: String,
-    @Json(name = "popularity")
+    @SerializedName("popularity")
     val popularity: Double,
-    @Json(name = "poster_path")
+    @SerializedName("poster_path")
     val posterPath: String,
-    @Json(name = "release_date")
+    @SerializedName("release_date")
     val releaseDate: String,
-    @Json(name = "title")
+    @SerializedName("title")
     val title: String,
-    @Json(name = "video")
+    @SerializedName("video")
     val video: Boolean,
-    @Json(name = "vote_average")
-    val voteAverage: Int,
-    @Json(name = "vote_count")
+    @SerializedName("vote_average")
+    val voteAverage: Double,
+    @SerializedName("vote_count")
     val voteCount: Int
 )

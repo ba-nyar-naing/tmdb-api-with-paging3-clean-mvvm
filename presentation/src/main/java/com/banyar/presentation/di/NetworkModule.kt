@@ -3,8 +3,6 @@ package com.banyar.presentation.di
 import android.content.Context
 import com.banyar.data.remote.api.APIInterceptor
 import com.banyar.data.remote.api.TMDBApiService
-import com.banyar.data.remote.repository.MovieListingRepositoryImpl
-import com.banyar.domain.repository.MovieListingRepository
 import com.readystatesoftware.chuck.ChuckInterceptor
 import dagger.Module
 import dagger.Provides
@@ -14,7 +12,7 @@ import dagger.hilt.components.SingletonComponent
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-import retrofit2.converter.moshi.MoshiConverterFactory
+import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -48,7 +46,7 @@ internal object NetworkModule {
         return Retrofit.Builder()
             .baseUrl("https://api.themoviedb.org/3/")
             .client(httpClient)
-            .addConverterFactory(MoshiConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(TMDBApiService::class.java)
     }

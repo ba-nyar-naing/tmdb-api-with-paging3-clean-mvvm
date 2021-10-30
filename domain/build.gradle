@@ -8,7 +8,11 @@ java {
 
 dependencies {
 
+    implementation CommonLibs.timber
+
     implementation DaggerHilt.core
 
     implementation Coroutine.coroutineCore
+
+    implementation Paging3.commonKtx
 }

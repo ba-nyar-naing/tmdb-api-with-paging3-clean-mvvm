@@ -23,7 +23,7 @@ object CommonLibs {
 object Retrofit {
     private const val version = "2.9.0"
     const val retrofit = "com.squareup.retrofit2:retrofit:$version"
-    const val moshi = "com.squareup.retrofit2:converter-moshi:$version"
+    const val gson = "com.squareup.retrofit2:converter-gson:$version"
     const val logging = "com.squareup.okhttp3:logging-interceptor:5.0.0-alpha.2"
 }
 
@@ -66,6 +66,15 @@ object AndroidXFragment {
 
 object Material {
     const val material = "com.google.android.material:material:1.4.0"
+}
+
+object Paging3 {
+    const val pagingKtx = "androidx.paging:paging-runtime-ktx:3.1.0-beta01"
+    const val commonKtx = "androidx.paging:paging-common-ktx:3.0.1"
+}
+
+object Image {
+    const val coil = "io.coil-kt:coil:1.4.0"
 }
 
 object AndroidXTest {
