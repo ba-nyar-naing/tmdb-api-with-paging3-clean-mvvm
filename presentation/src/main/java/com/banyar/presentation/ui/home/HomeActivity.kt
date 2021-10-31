@@ -4,9 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.viewModels
-import com.banyar.presentation.ui.base.BaseActivity
 import com.banyar.presentation.databinding.ActivityHomeBinding
-import com.banyar.presentation.ui.detail.DetailActivity
+import com.banyar.presentation.ui.base.BaseActivity
 import com.banyar.presentation.ui.listing.ListingActivity
 import timber.log.Timber
 
@@ -38,10 +37,6 @@ class HomeActivity : BaseActivity() {
         binding.btnDoAction.setOnClickListener {
             Toast.makeText(applicationContext, "Doing some action", Toast.LENGTH_SHORT).show()
             viewModel.getPopularMovies()
-        }
-
-        binding.btnOpenDetail.setOnClickListener {
-            startActivity(Intent(this, DetailActivity::class.java))
         }
 
         binding.btnOpenListing.setOnClickListener {

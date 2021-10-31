@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#FFFFFF</color>
+    <color name="colorPrimary">#2F2F32</color>
     <color name="colorPrimaryVariant">#2F2F32</color>
     <color name="colorOnPrimary">#000000</color>
-    <color name="colorPrimaryText">#000000</color>
+    <color name="colorPrimaryText">#E1E1E1</color>
 
     <color name="colorSecondary">#9298ab</color>
     <color name="colorSecondaryVariant">#7C8191</color>
-    <color name="colorOnSecondary">#292929</color>
-    <color name="colorSecondaryText">#292929</color>
+    <color name="colorOnSecondary">#BCBCBC</color>
+    <color name="colorSecondaryText">#BCBCBC</color>
 
 </resources>

@@ -1,11 +1,13 @@
 package com.banyar.presentation.ui.detail
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import coil.load
-import com.banyar.presentation.ui.base.BaseActivity
+import com.banyar.domain.model.Genre
 import com.banyar.presentation.databinding.ActivityDetailBinding
-import timber.log.Timber
+import com.banyar.presentation.ui.base.BaseActivity
+import com.google.android.material.chip.Chip
 
 class DetailActivity : BaseActivity() {
 
@@ -33,13 +35,24 @@ class DetailActivity : BaseActivity() {
             title = movieDetails.title
 
             with(binding) {
+                txvTitle.text = movieDetails.title
                 txvOverview.text = movieDetails.overview
                 ivPoster.load("https://image.tmdb.org/t/p/w500${movieDetails.posterPath}")
+
+                movieDetails.genres?.let { setupGenreChip(it) }
             }
         }
     }
 
     override fun setupActionListener() {
-        Timber.d("setupActionListener: Not yet implemented")
+    }
+
+    private fun setupGenreChip(genres: List<Genre>) {
+        genres.map { genre ->
+            val chip = Chip(this)
+            chip.isClickable = false
+            chip.text = genre.name
+            binding.cgGenre.addView(chip as View)
+        }
     }
 }
