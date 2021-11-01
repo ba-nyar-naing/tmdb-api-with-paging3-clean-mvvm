@@ -64,6 +64,11 @@ dependencies {
 
     implementation Image.coil
 
+    implementation AndroidXNavigation.fragmentKtx
+    implementation AndroidXNavigation.uiKtx
+
+    implementation AndroidXLegacy.legacySupport
+
     testImplementation CommonLibs.junit
 
     androidTestImplementation AndroidXTest.junit

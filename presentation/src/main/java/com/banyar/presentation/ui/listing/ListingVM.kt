@@ -13,6 +13,9 @@ class ListingVM @Inject constructor(
     private val getPopularMoviesUC: GetPopularMoviesUC,
 ) : BaseViewModel() {
 
+    override fun init() {
+    }
+
     suspend fun getPagingData(): Flow<PagingData<MovieDetails>> {
         return getPopularMoviesUC(Any())
     }

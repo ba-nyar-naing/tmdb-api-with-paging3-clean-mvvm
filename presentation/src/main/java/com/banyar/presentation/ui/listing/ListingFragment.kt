@@ -1,40 +1,48 @@
 package com.banyar.presentation.ui.listing
 
 import android.os.Bundle
-import androidx.activity.viewModels
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.banyar.presentation.databinding.ActivityListingBinding
-import com.banyar.presentation.ui.adapter.MoviesAdapter
+import com.banyar.presentation.databinding.FragmentListingBinding
 import com.banyar.presentation.ui.adapter.LoadingStateAdapter
-import com.banyar.presentation.ui.base.BaseActivity
+import com.banyar.presentation.ui.adapter.MoviesAdapter
+import com.banyar.presentation.ui.base.BaseFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
-class ListingActivity : BaseActivity() {
+class ListingFragment : BaseFragment() {
 
-    private lateinit var binding: ActivityListingBinding
+    private var _binding: FragmentListingBinding? = null
+    private val binding get() = _binding!!
 
     private val viewModel: ListingVM by viewModels()
 
     private var moviesAdapter: MoviesAdapter? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityListingBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        _binding = FragmentListingBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
-        setupObserver()
-        setupUIElements()
-        setupActionListener()
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
     }
 
     override fun setupUIElements() {
+        setActionBarTitle("Popular movies")
+
         moviesAdapter = MoviesAdapter()
 
         binding.rcvMovie.apply {
-            layoutManager = GridLayoutManager(applicationContext, 3)
+            layoutManager = GridLayoutManager(requireContext(), 3)
             adapter = moviesAdapter?.withLoadStateFooter(
                 footer = LoadingStateAdapter()
             )
@@ -48,10 +56,9 @@ class ListingActivity : BaseActivity() {
     }
 
     override fun setupObserver() {
-
     }
 
     override fun setupActionListener() {
-
     }
+
 }

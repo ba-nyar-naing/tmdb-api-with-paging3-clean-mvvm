@@ -64,6 +64,16 @@ object AndroidXFragment {
     const val fragmentKtx = "androidx.fragment:fragment-ktx:1.3.6"
 }
 
+object AndroidXNavigation {
+    private const val version = "2.3.5"
+    const val fragmentKtx = "androidx.navigation:navigation-fragment-ktx:$version"
+    const val uiKtx = "androidx.navigation:navigation-ui-ktx:$version"
+}
+
+object AndroidXLegacy {
+    const val legacySupport = "androidx.legacy:legacy-support-v4:1.0.0"
+}
+
 object Material {
     const val material = "com.google.android.material:material:1.4.0"
 }

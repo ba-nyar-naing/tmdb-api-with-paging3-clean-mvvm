@@ -18,10 +18,12 @@ class DetailVM @Inject constructor(
 
     val movieDetails by lazy { MutableLiveData<MovieDetails>() }
 
+    override fun init() {
+    }
+
     fun getMovieDetails(id: Int) {
         viewModelScope.launch {
             getMovieDetailsUC(id).collect { movieDetails.postValue(it) }
         }
     }
-
 }

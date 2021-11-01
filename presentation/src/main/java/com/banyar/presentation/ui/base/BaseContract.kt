@@ -6,15 +6,12 @@ object BaseContract {
         fun setupUIElements()
         fun setupObserver()
         fun setupActionListener()
+
+        fun setActionBarTitle(title: String?)
+        fun setBottomNavBarVisibility(visible: Boolean)
     }
 
     interface IViewModel {
-        fun onTest(message: String)
-    }
-
-    interface IRepository<VM : IViewModel> {
-        val vm: VM
-
-        fun onAttach(viewModel: VM)
+        fun init()
     }
 }

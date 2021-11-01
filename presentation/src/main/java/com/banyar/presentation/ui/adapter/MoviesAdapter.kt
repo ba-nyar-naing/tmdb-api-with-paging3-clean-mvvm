@@ -3,18 +3,20 @@ package com.banyar.presentation.ui.adapter
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.navigation.findNavController
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.banyar.domain.model.MovieDetails
-import com.banyar.presentation.databinding.ItemImageMovieBinding
-import com.banyar.presentation.ui.detail.DetailActivity
+import com.banyar.presentation.R
+import com.banyar.presentation.databinding.ItemMovieBinding
 
 class MoviesAdapter : PagingDataAdapter<MovieDetails, MoviesAdapter.ViewHolder>(DataDiffer) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val binding = ItemImageMovieBinding.inflate(
+        val binding = ItemMovieBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
         return ViewHolder(binding)
@@ -25,7 +27,7 @@ class MoviesAdapter : PagingDataAdapter<MovieDetails, MoviesAdapter.ViewHolder>(
     }
 
     inner class ViewHolder(
-        private val binding: ItemImageMovieBinding,
+        private val binding: ItemMovieBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(movie: MovieDetails) {
@@ -35,9 +37,10 @@ class MoviesAdapter : PagingDataAdapter<MovieDetails, MoviesAdapter.ViewHolder>(
 
                 val context = root.context
                 root.rootView.setOnClickListener {
-                    val intent = Intent(context, DetailActivity::class.java)
-                    intent.putExtra("id", movie.id)
-                    context.startActivity(intent)
+                    val bundle = bundleOf(
+                        context.getString(R.string.id) to movie.id
+                    )
+                    root.findNavController().navigate(R.id.desc_detail, bundle)
                 }
             }
         }
