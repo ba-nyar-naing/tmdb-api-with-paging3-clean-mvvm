@@ -14,6 +14,12 @@ interface TMDBApiService {
         @Query("language") language: String = "en-US"
     ): PopularResponse
 
+    @GET("movie/upcoming")
+    suspend fun getUpcoming(
+        @Query("page") page: Int,
+        @Query("language") language: String = "en-US"
+    ): PopularResponse
+
     @GET("movie/{id}")
     suspend fun getDetails(
         @Path("id") id: Int

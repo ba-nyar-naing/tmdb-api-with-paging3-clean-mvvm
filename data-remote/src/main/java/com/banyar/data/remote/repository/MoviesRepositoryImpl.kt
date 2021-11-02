@@ -24,4 +24,10 @@ class MoviesRepositoryImpl @Inject constructor(
         val popularMovies = response.toDomain()
         emit(popularMovies)
     }
+
+    override fun getUpcomingMovies(page: Int): Flow<PopularMovies> = flow {
+        val response = tmdbService.getUpcoming(page)
+        val popularMovies = response.toDomain()
+        emit(popularMovies)
+    }
 }

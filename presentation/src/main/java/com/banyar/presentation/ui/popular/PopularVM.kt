@@ -1,4 +1,4 @@
-package com.banyar.presentation.ui.listing
+package com.banyar.presentation.ui.popular
 
 import androidx.paging.PagingData
 import com.banyar.domain.model.MovieDetails
@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 @HiltViewModel
-class ListingVM @Inject constructor(
+class PopularVM @Inject constructor(
     private val getPopularMoviesUC: GetPopularMoviesUC,
 ) : BaseViewModel() {
 

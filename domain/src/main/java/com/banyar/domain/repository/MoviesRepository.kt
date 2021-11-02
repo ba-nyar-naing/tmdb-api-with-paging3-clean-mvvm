@@ -9,4 +9,6 @@ interface MoviesRepository {
     fun getDetails(id: Int): Flow<MovieDetails>
 
     fun getPopularMovies(page: Int): Flow<PopularMovies>
+
+    fun getUpcomingMovies(page: Int): Flow<PopularMovies>
 }

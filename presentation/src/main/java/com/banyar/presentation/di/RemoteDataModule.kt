@@ -14,7 +14,7 @@ internal object RemoteDataModule {
 
     @Provides
     @Singleton
-    fun provideListingRepo(
+    fun provideMoviesRepo(
         repositoryImpl: MoviesRepositoryImpl
     ): MoviesRepository = repositoryImpl
 }

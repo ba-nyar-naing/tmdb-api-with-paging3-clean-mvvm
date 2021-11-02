@@ -3,15 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/home_navigation"
-    app:startDestination="@id/desc_listing">
+    app:startDestination="@id/desc_popular">
 
     <fragment
-        android:id="@+id/desc_listing"
-        android:name="com.banyar.presentation.ui.listing.ListingFragment"
-        android:label="fragment_listing"
-        tools:layout="@layout/fragment_listing">
+        android:id="@+id/desc_popular"
+        android:name="com.banyar.presentation.ui.popular.PopularFragment"
+        android:label="fragment_popular"
+        tools:layout="@layout/fragment_popular">
         <action
-            android:id="@+id/action_listing_to_detail"
+            android:id="@+id/action_popular_to_detail"
             app:destination="@id/desc_detail" />
     </fragment>
 
@@ -20,9 +20,11 @@
         android:name="com.banyar.presentation.ui.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" />
+
     <fragment
         android:id="@+id/desc_favourite"
-        android:name="com.banyar.presentation.ui.listing.ListingFragment"
-        android:label="fragment_detail"
-        tools:layout="@layout/fragment_detail" />
+        android:name="com.banyar.presentation.ui.favourite.FavouriteFragment"
+        android:label="fragment_favourite"
+        tools:layout="@layout/fragment_favourite" />
+
 </navigation>

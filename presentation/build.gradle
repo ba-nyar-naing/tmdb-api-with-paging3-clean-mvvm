@@ -48,6 +48,7 @@ dependencies {
     implementation CommonLibs.timber
 
     implementation AndroidXHilt.lifecycle
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     kapt AndroidXHilt.compiler
 
     implementation DaggerHilt.android
