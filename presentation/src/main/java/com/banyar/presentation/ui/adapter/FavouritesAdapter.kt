@@ -8,11 +8,11 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.banyar.domain.model.MovieDetails
+import com.banyar.domain.model.Favourite
 import com.banyar.presentation.R
 import com.banyar.presentation.databinding.ItemMovieBinding
 
-class MoviesAdapter : PagingDataAdapter<MovieDetails, MoviesAdapter.ViewHolder>(DataDiffer) {
+class FavouritesAdapter : PagingDataAdapter<Favourite, FavouritesAdapter.ViewHolder>(DataDiffer) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemMovieBinding.inflate(
@@ -29,7 +29,7 @@ class MoviesAdapter : PagingDataAdapter<MovieDetails, MoviesAdapter.ViewHolder>(
         private val binding: ItemMovieBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(movie: MovieDetails) {
+        fun bind(movie: Favourite) {
             with(binding) {
                 txvTitle.text = movie.title
                 ivPoster.load("https://image.tmdb.org/t/p/w500${movie.posterPath}")
@@ -45,17 +45,17 @@ class MoviesAdapter : PagingDataAdapter<MovieDetails, MoviesAdapter.ViewHolder>(
         }
     }
 
-    object DataDiffer : DiffUtil.ItemCallback<MovieDetails>() {
+    object DataDiffer : DiffUtil.ItemCallback<Favourite>() {
         override fun areItemsTheSame(
-            oldItem: MovieDetails,
-            newItem: MovieDetails
+            oldItem: Favourite,
+            newItem: Favourite
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: MovieDetails,
-            newItem: MovieDetails
+            oldItem: Favourite,
+            newItem: Favourite
         ): Boolean {
             return oldItem == newItem
         }

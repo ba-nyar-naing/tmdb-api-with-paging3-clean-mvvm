@@ -8,8 +8,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import com.banyar.presentation.databinding.FragmentFavouriteBinding
+import com.banyar.presentation.ui.adapter.FavouritesAdapter
 import com.banyar.presentation.ui.adapter.LoadingStateAdapter
-import com.banyar.presentation.ui.adapter.MoviesAdapter
 import com.banyar.presentation.ui.base.BaseFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -21,7 +21,7 @@ class FavouriteFragment : BaseFragment() {
 
     private val viewModel: FavouriteVM by viewModels()
 
-    private var moviesAdapter: MoviesAdapter? = null
+    private var favouritesAdapter: FavouritesAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,18 +39,18 @@ class FavouriteFragment : BaseFragment() {
     override fun setupUIElements() {
         setActionBarTitle("Favourite movies")
 
-        moviesAdapter = MoviesAdapter()
+        favouritesAdapter = FavouritesAdapter()
 
         binding.rcvMovie.apply {
             layoutManager = GridLayoutManager(requireContext(), 3)
-            adapter = moviesAdapter?.withLoadStateFooter(
+            adapter = favouritesAdapter?.withLoadStateFooter(
                 footer = LoadingStateAdapter()
             )
         }
 
         lifecycleScope.launch {
             viewModel.getPagingData().collect { last ->
-                moviesAdapter?.submitData(last)
+                favouritesAdapter?.submitData(last)
             }
         }
     }

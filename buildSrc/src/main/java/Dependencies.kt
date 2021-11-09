@@ -87,6 +87,16 @@ object Image {
     const val coil = "io.coil-kt:coil:1.4.0"
 }
 
+object AndoidXRoom {
+    private const val version = "2.3.0"
+
+    const val roomRuntime = "androidx.room:room-runtime:$version"
+    const val roomCommon = "androidx.room:room-common:$version"
+    const val roomKtx = "androidx.room:room-ktx:$version"
+    const val roomCompiler = "androidx.room:room-compiler:$version"
+    const val roomTest = "androidx.room:room-testing:$version"
+}
+
 object AndroidXTest {
     private const val version = "1.1.3"
 

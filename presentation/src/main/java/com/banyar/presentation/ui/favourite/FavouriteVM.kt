@@ -1,7 +1,7 @@
 package com.banyar.presentation.ui.favourite
 
 import androidx.paging.PagingData
-import com.banyar.domain.model.MovieDetails
+import com.banyar.domain.model.Favourite
 import com.banyar.domain.usecase.GetFavouriteMoviesUC
 import com.banyar.presentation.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +16,7 @@ class FavouriteVM @Inject constructor(
     override fun init() {
     }
 
-    suspend fun getPagingData(): Flow<PagingData<MovieDetails>> {
+    suspend fun getPagingData(): Flow<PagingData<Favourite>> {
         return getFavouriteMoviesUC(Any())
     }
 }

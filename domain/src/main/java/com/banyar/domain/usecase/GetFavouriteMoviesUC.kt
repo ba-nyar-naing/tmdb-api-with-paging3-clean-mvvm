@@ -1,18 +1,18 @@
 package com.banyar.domain.usecase
 
 import androidx.paging.*
-import com.banyar.domain.model.MovieDetails
-import com.banyar.domain.repository.MoviesRepository
+import com.banyar.domain.model.Favourite
+import com.banyar.domain.repository.FavouriteRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
 import javax.inject.Singleton
 
-typealias GetFavouriteMoviesBaseUC = BaseUseCase<Any, Flow<PagingData<MovieDetails>>>
+typealias GetFavouriteMoviesBaseUC = BaseUseCase<Any, Flow<PagingData<Favourite>>>
 
 @Singleton
 class GetFavouriteMoviesUC @Inject constructor(
-    private val repository: MoviesRepository
+    private val repository: FavouriteRepository
 ) : GetFavouriteMoviesBaseUC {
 
     override suspend fun invoke(params: Any) =
@@ -25,19 +25,19 @@ class GetFavouriteMoviesUC @Inject constructor(
 }
 
 class FavouriteMoviesPagingSource(
-    private val repository: MoviesRepository
-) : PagingSource<Int, MovieDetails>() {
+    private val repository: FavouriteRepository
+) : PagingSource<Int, Favourite>() {
 
-    override fun getRefreshKey(state: PagingState<Int, MovieDetails>): Int? = state.anchorPosition
+    override fun getRefreshKey(state: PagingState<Int, Favourite>): Int? = state.anchorPosition
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieDetails> {
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Favourite> {
         val currentLoadingPageKey = params.key ?: 1
 
         return try {
-            val response = repository.getUpcomingMovies(currentLoadingPageKey).first()
+            val response = repository.getAllFavourites(currentLoadingPageKey).first()
 
             LoadResult.Page(
-                data = response.movies,
+                data = response,
                 prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey,
                 nextKey = currentLoadingPageKey + 1
             )
