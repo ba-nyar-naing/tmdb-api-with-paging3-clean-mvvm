@@ -18,6 +18,9 @@ interface FavouriteDAO {
     @Query("SELECT * FROM favourites ORDER BY updated_at DESC")
     suspend fun getAll(): List<FavouriteEntity>
 
+    @Query("SELECT * FROM favourites  ORDER BY updated_at DESC LIMIT :pageSize OFFSET :pageIndex * :pageSize")
+    suspend fun get(pageSize: Int, pageIndex: Int): List<FavouriteEntity>
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(favouriteEntity: FavouriteEntity): Long
 }

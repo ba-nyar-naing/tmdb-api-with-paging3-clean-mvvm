@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import coil.load
+import com.banyar.domain.model.Favourite
 import com.banyar.domain.model.Genre
 import com.banyar.presentation.R
 import com.banyar.presentation.databinding.FragmentDetailBinding
@@ -60,6 +61,16 @@ class DetailFragment : BaseFragment() {
     }
 
     override fun setupActionListener() {
+        binding.btnFavourite.setOnClickListener {
+            val movieDetails = viewModel.movieDetails.value ?: return@setOnClickListener
+            val favourite = Favourite(
+                movieDetails.id!!,
+                movieDetails.title!!,
+                movieDetails.posterPath!!,
+                System.currentTimeMillis().toString()
+            )
+            viewModel.insertFavourite(favourite)
+        }
     }
 
     override fun onDestroy() {

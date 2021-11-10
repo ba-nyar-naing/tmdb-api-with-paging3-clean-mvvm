@@ -5,15 +5,12 @@ import com.banyar.domain.model.Favourite
 import com.banyar.domain.repository.FavouriteRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
-import javax.inject.Inject
-import javax.inject.Singleton
 
-typealias GetFavouriteMoviesBaseUC = BaseUseCase<Any, Flow<PagingData<Favourite>>>
+interface GetFavouritesUC : BaseUseCase<Any, Flow<PagingData<Favourite>>>
 
-@Singleton
-class GetFavouriteMoviesUC @Inject constructor(
+class GetFavouritesUCImpl(
     private val repository: FavouriteRepository
-) : GetFavouriteMoviesBaseUC {
+) : GetFavouritesUC {
 
     override suspend fun invoke(params: Any) =
         Pager(
@@ -24,6 +21,8 @@ class GetFavouriteMoviesUC @Inject constructor(
         ).flow
 }
 
+private const val PAGE_SIZE = 10
+
 class FavouriteMoviesPagingSource(
     private val repository: FavouriteRepository
 ) : PagingSource<Int, Favourite>() {
@@ -31,16 +30,23 @@ class FavouriteMoviesPagingSource(
     override fun getRefreshKey(state: PagingState<Int, Favourite>): Int? = state.anchorPosition
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Favourite> {
-        val currentLoadingPageKey = params.key ?: 1
+        val currentLoadingPageKey = params.key ?: 0
 
         return try {
-            val response = repository.getAllFavourites(currentLoadingPageKey).first()
+            val response = repository.getFavourites(
+                pageSize = PAGE_SIZE,
+                pageIndex = currentLoadingPageKey
+            ).first()
 
-            LoadResult.Page(
-                data = response,
-                prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey,
-                nextKey = currentLoadingPageKey + 1
-            )
+            if (response.isEmpty()) {
+                throw Exception("List is empty")
+            } else {
+                LoadResult.Page(
+                    data = response,
+                    prevKey = if (currentLoadingPageKey == 0) null else currentLoadingPageKey,
+                    nextKey = currentLoadingPageKey + 1
+                )
+            }
         } catch (e: Exception) {
             LoadResult.Error(e)
         }

@@ -3,16 +3,14 @@ package com.banyar.domain.usecase
 import androidx.paging.*
 import com.banyar.domain.model.MovieDetails
 import com.banyar.domain.repository.MoviesRepository
-import kotlinx.coroutines.flow.*
-import javax.inject.Inject
-import javax.inject.Singleton
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 
-typealias GetPopularMoviesBaseUC = BaseUseCase<Any, Flow<PagingData<MovieDetails>>>
+interface GetPopularUC : BaseUseCase<Any, Flow<PagingData<MovieDetails>>>
 
-@Singleton
-class GetPopularMoviesUC @Inject constructor(
+class GetPopularUCImpl(
     private val repository: MoviesRepository
-) : GetPopularMoviesBaseUC {
+) : GetPopularUC {
 
     override suspend fun invoke(params: Any) =
         Pager(
