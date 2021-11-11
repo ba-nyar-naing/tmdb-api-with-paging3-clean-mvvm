@@ -6,6 +6,7 @@ import com.banyar.data.local.mapper.toEntity
 import com.banyar.domain.model.Favourite
 import com.banyar.domain.model.Result
 import com.banyar.domain.repository.FavouriteRepository
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
@@ -17,6 +18,12 @@ class FavouriteRepositoryImpl @Inject constructor(
         val result = favouriteDAO.get(pageSize, pageIndex)
         val favourites = result.map { it.toDomain() }
         emit(favourites)
+    }
+
+    override fun getFavourite(id: Int) = flow {
+        val result = favouriteDAO.get(id)
+        val favourite = result?.toDomain()
+        emit(favourite)
     }
 
     override fun insertFavourite(favourite: Favourite) = flow {

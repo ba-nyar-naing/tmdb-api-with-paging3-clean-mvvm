@@ -4,9 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import coil.load
-import com.banyar.domain.model.Favourite
 import com.banyar.domain.model.Genre
 import com.banyar.presentation.R
 import com.banyar.presentation.databinding.FragmentDetailBinding
@@ -44,10 +44,28 @@ class DetailFragment : BaseFragment() {
 
         val movieId = arguments?.getInt(getString(R.string.id)) ?: -1
         viewModel.getMovieDetails(movieId)
+        viewModel.checkFavoruiteStats(movieId)
     }
 
     override fun setupObserver() {
-        viewModel.movieDetails.observe(this) { movieDetails ->
+        viewModel.uiState.observe(viewLifecycleOwner) { uiState ->
+            when (uiState) {
+                is DetailUIState.FavouriteDeleteFailed -> {
+                    Toast.makeText(requireContext(), "Failed to remove", Toast.LENGTH_SHORT).show()
+                }
+                is DetailUIState.ShowSaveFavourite -> {
+                    binding.btnFavourite.setText(R.string.favourite)
+                }
+                is DetailUIState.FavouriteSaveFailed -> {
+                    Toast.makeText(requireContext(), "Failed to save", Toast.LENGTH_SHORT).show()
+                }
+                is DetailUIState.ShowDeleteFavourite -> {
+                    binding.btnFavourite.setText(R.string.saved)
+                }
+            }
+        }
+
+        viewModel.movieDetails.observe(viewLifecycleOwner) { movieDetails ->
             setActionBarTitle(movieDetails.title)
 
             with(binding) {
@@ -61,15 +79,13 @@ class DetailFragment : BaseFragment() {
     }
 
     override fun setupActionListener() {
-        binding.btnFavourite.setOnClickListener {
-            val movieDetails = viewModel.movieDetails.value ?: return@setOnClickListener
-            val favourite = Favourite(
-                movieDetails.id!!,
-                movieDetails.title!!,
-                movieDetails.posterPath!!,
-                System.currentTimeMillis().toString()
-            )
-            viewModel.insertFavourite(favourite)
+        with(binding) {
+            btnFavourite.setOnClickListener {
+                when (btnFavourite.text) {
+                    requireContext().getString(R.string.favourite) -> viewModel.insertFavourite()
+                    requireContext().getString(R.string.saved) -> viewModel.deleteFavourite()
+                }
+            }
         }
     }
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +8,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:padding="16dp">
 
         <ImageView
@@ -24,6 +24,31 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/venom" />
 
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_play"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="8dp"
+            android:padding="12dp"
+            android:text="@string/play"
+            app:layout_constraintEnd_toStartOf="@id/btn_favourite"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintStart_toStartOf="@id/iv_poster"
+            app:layout_constraintTop_toBottomOf="@id/iv_poster" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_favourite"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:padding="12dp"
+            android:text="@string/favourite"
+            app:layout_constraintEnd_toEndOf="@id/iv_poster"
+            app:layout_constraintStart_toEndOf="@id/btn_play"
+            app:layout_constraintTop_toTopOf="@id/btn_play" />
+
         <com.google.android.material.chip.ChipGroup
             android:id="@+id/cg_genre"
             android:layout_width="0dp"
@@ -31,7 +56,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_poster" />
+            app:layout_constraintTop_toBottomOf="@id/btn_play" />
 
         <TextView
             android:id="@+id/txv_title"
@@ -53,15 +78,13 @@
             app:layout_constraintTop_toBottomOf="@id/txv_title"
             tools:text="After finding a host body in investigative reporter Eddie Brock, the alien symbiote must face a new enemy, Carnage, the alter ego of serial killer Cletus Kasady." />
 
-        <Button
-            android:id="@+id/btn_favourite"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="32dp"
-            android:text="Favourite"
-            app:layout_constraintEnd_toEndOf="parent"
+        <View
+            android:id="@+id/fake_scroll"
+            android:layout_width="100dp"
+            android:layout_height="400dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/txv_overview" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</FrameLayout>
+</ScrollView>

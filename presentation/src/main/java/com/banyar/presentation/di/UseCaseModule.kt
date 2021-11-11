@@ -27,6 +27,12 @@ internal object UseCaseModule {
 
     @Provides
     @Singleton
+    fun provideGetFavouriteStatUseCase(
+        repository: FavouriteRepository
+    ): GetFavouriteStatUC = GetFavouriteStatUCImpl(repository)
+
+    @Provides
+    @Singleton
     fun provideGetFavouritesUseCase(
         repository: FavouriteRepository
     ): GetFavouritesUC = GetFavouritesUCImpl(repository)
@@ -42,6 +48,4 @@ internal object UseCaseModule {
     fun provideGetPopularUseCase(
         repository: MoviesRepository
     ): GetPopularUC = GetPopularUCImpl(repository)
-
-
 }

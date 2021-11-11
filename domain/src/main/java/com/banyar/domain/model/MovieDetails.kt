@@ -23,3 +23,10 @@ data class MovieDetails(
     var voteAverage: Double?,
     var voteCount: Int?
 )
+
+fun MovieDetails.toFavourite() = Favourite(
+    id!!,
+    title!!,
+    posterPath!!,
+    System.currentTimeMillis().toString()
+)
