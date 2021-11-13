@@ -27,6 +27,6 @@ class GetPopularUCImpl(
 class PopularMoviesPagingSource(
     repository: MoviesRepository
 ) : BaseMoviesPagingSource(
-    MovieSourceType.Popular,
+    MovieSourceType.POPULAR,
     repository
 )

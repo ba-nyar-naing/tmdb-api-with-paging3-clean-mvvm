@@ -34,12 +34,7 @@ class DetailFragment : BaseFragment() {
     }
 
     override fun setupUIElements() {
-        setBottomNavBarVisibility(false)
-
-        val title = arguments?.getString(getString(R.string.title))
-        setActionBarTitle("$title movies")
-
-        val movieId = arguments?.getInt(getString(R.string.id)) ?: -1
+        val movieId = requireActivity().intent.getIntExtra("id", 0)
         viewModel.getMovieDetails(movieId)
         viewModel.checkFavouriteStats(movieId)
     }
@@ -84,11 +79,6 @@ class DetailFragment : BaseFragment() {
                 }
             }
         }
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        setBottomNavBarVisibility(true)
     }
 
     private fun setupGenreChip(genres: List<Genre>) {

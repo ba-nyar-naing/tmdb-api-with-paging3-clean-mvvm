@@ -27,6 +27,6 @@ class GetUpcomingUCImpl(
 class UpcomingMoviesPagingSource(
     repository: MoviesRepository
 ) : BaseMoviesPagingSource(
-    MovieSourceType.Upcoming,
+    MovieSourceType.UPCOMING,
     repository
 ) 

@@ -6,9 +6,9 @@ import com.banyar.domain.model.MovieDetails
 import com.banyar.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.first
 
-sealed class MovieSourceType {
-    object Popular : MovieSourceType()
-    object Upcoming : MovieSourceType()
+enum class MovieSourceType {
+    POPULAR,
+    UPCOMING
 }
 
 abstract class BaseMoviesPagingSource(
@@ -23,8 +23,8 @@ abstract class BaseMoviesPagingSource(
 
         return try {
             val response = when (source) {
-                MovieSourceType.Popular -> repository.getPopularMovies(currentLoadingPageKey)
-                MovieSourceType.Upcoming -> repository.getUpcomingMovies(currentLoadingPageKey)
+                MovieSourceType.POPULAR -> repository.getPopularMovies(currentLoadingPageKey)
+                MovieSourceType.UPCOMING -> repository.getUpcomingMovies(currentLoadingPageKey)
             }.first()
 
             LoadResult.Page(

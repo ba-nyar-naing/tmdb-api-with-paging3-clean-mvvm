@@ -12,7 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TMDB">
         <activity
-            android:name="com.banyar.presentation.ui.HomeActivity"
+            android:name=".ui.detail.DetailActivity"
+            android:exported="true"
+            android:label=" " />
+        <activity
+            android:name=".ui.listing.ListingActivity"
+            android:exported="true"
+            android:label=" " />
+        <activity
+            android:name=".ui.home.HomeActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

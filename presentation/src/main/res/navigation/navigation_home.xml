@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/home_navigation"
+    app:startDestination="@id/desc_home">
+
+    <fragment
+        android:id="@+id/desc_home"
+        android:name="com.banyar.presentation.ui.home.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+
+    <activity
+        android:id="@+id/desc_listing"
+        android:name="com.banyar.presentation.ui.listing.ListingActivity" />
+
+    <activity
+        android:id="@+id/desc_detail"
+        android:name="com.banyar.presentation.ui.detail.DetailActivity" />
+</navigation>

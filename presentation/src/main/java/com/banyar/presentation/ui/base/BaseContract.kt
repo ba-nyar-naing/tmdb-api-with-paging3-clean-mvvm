@@ -8,7 +8,6 @@ object BaseContract {
         fun setupActionListener()
 
         fun setActionBarTitle(title: String?)
-        fun setBottomNavBarVisibility(visible: Boolean)
     }
 
     interface IViewModel {
