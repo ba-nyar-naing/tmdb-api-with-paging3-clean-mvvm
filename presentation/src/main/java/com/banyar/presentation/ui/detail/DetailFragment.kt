@@ -10,7 +10,6 @@ import coil.load
 import com.banyar.domain.model.Genre
 import com.banyar.presentation.R
 import com.banyar.presentation.databinding.FragmentDetailBinding
-import com.banyar.presentation.ui.adapter.MoviesAdapter
 import com.banyar.presentation.ui.base.BaseFragment
 import com.google.android.material.chip.Chip
 
@@ -20,8 +19,6 @@ class DetailFragment : BaseFragment() {
     private val binding get() = _binding!!
 
     private val viewModel: DetailVM by viewModels()
-
-    private var moviesAdapter: MoviesAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +41,7 @@ class DetailFragment : BaseFragment() {
 
         val movieId = arguments?.getInt(getString(R.string.id)) ?: -1
         viewModel.getMovieDetails(movieId)
-        viewModel.checkFavoruiteStats(movieId)
+        viewModel.checkFavouriteStats(movieId)
     }
 
     override fun setupObserver() {

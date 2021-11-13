@@ -43,9 +43,16 @@ internal object UseCaseModule {
         repository: MoviesRepository
     ): GetDetailsUC = GetDetailsUCImpl(repository)
 
+
     @Provides
     @Singleton
     fun provideGetPopularUseCase(
         repository: MoviesRepository
     ): GetPopularUC = GetPopularUCImpl(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetUpcomingUseCase(
+        repository: MoviesRepository
+    ): GetUpcomingUC = GetUpcomingUCImpl(repository)
 }

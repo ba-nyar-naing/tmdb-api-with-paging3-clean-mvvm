@@ -38,7 +38,7 @@ class DetailVM @Inject constructor(
         }
     }
 
-    fun checkFavoruiteStats(id: Int) {
+    fun checkFavouriteStats(id: Int) {
         viewModelScope.launch {
             getFavouriteStatUC(id).collect { favourite ->
                 if (favourite == null) {

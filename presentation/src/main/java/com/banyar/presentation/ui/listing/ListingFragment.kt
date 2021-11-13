@@ -1,4 +1,4 @@
-package com.banyar.presentation.ui.popular
+package com.banyar.presentation.ui.listing
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,19 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
-import com.banyar.presentation.databinding.FragmentPopularBinding
+import com.banyar.presentation.databinding.FragmentListingBinding
 import com.banyar.presentation.ui.adapter.LoadingStateAdapter
 import com.banyar.presentation.ui.adapter.MoviesAdapter
 import com.banyar.presentation.ui.base.BaseFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
-class PopularFragment : BaseFragment() {
+class ListingFragment : BaseFragment() {
 
-    private var _binding: FragmentPopularBinding? = null
+    private var _binding: FragmentListingBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: PopularVM by viewModels()
+    private val viewModel: ListingVM by viewModels()
 
     private var moviesAdapter: MoviesAdapter? = null
 
@@ -27,7 +27,7 @@ class PopularFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPopularBinding.inflate(inflater, container, false)
+        _binding = FragmentListingBinding.inflate(inflater, container, false)
         return binding.root
     }
 

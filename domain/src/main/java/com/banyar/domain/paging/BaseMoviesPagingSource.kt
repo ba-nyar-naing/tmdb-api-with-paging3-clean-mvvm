@@ -1,0 +1,39 @@
+package com.banyar.domain.paging
+
+import androidx.paging.PagingSource
+import androidx.paging.PagingState
+import com.banyar.domain.model.MovieDetails
+import com.banyar.domain.repository.MoviesRepository
+import kotlinx.coroutines.flow.first
+
+sealed class MovieSourceType {
+    object Popular : MovieSourceType()
+    object Upcoming : MovieSourceType()
+}
+
+abstract class BaseMoviesPagingSource(
+    private val source: MovieSourceType,
+    private val repository: MoviesRepository
+) : PagingSource<Int, MovieDetails>() {
+
+    override fun getRefreshKey(state: PagingState<Int, MovieDetails>): Int? = state.anchorPosition
+
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MovieDetails> {
+        val currentLoadingPageKey = params.key ?: 1
+
+        return try {
+            val response = when (source) {
+                MovieSourceType.Popular -> repository.getPopularMovies(currentLoadingPageKey)
+                MovieSourceType.Upcoming -> repository.getUpcomingMovies(currentLoadingPageKey)
+            }.first()
+
+            LoadResult.Page(
+                data = response.movies,
+                prevKey = if (currentLoadingPageKey == 1) null else currentLoadingPageKey,
+                nextKey = currentLoadingPageKey + 1
+            )
+        } catch (e: Exception) {
+            LoadResult.Error(e)
+        }
+    }
+}

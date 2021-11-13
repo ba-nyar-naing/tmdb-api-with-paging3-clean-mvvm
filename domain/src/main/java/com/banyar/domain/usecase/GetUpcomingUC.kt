@@ -9,24 +9,24 @@ import com.banyar.domain.paging.MovieSourceType
 import com.banyar.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
 
-interface GetPopularUC : BaseUseCase<Any, Flow<PagingData<MovieDetails>>>
+interface GetUpcomingUC : BaseUseCase<Any, Flow<PagingData<MovieDetails>>>
 
-class GetPopularUCImpl(
+class GetUpcomingUCImpl(
     private val repository: MoviesRepository
-) : GetPopularUC {
+) : GetUpcomingUC {
 
     override suspend fun invoke(params: Any) =
         Pager(
             config = PagingConfig(pageSize = 1, enablePlaceholders = false),
             pagingSourceFactory = {
-                PopularMoviesPagingSource(repository)
+                UpcomingMoviesPagingSource(repository)
             }
         ).flow
 }
 
-class PopularMoviesPagingSource(
+class UpcomingMoviesPagingSource(
     repository: MoviesRepository
 ) : BaseMoviesPagingSource(
-    MovieSourceType.Popular,
+    MovieSourceType.Upcoming,
     repository
-)
+) 
