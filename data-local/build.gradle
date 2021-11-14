@@ -37,9 +37,12 @@ dependencies {
     api AndoidXRoom.roomRuntime
     kapt AndoidXRoom.roomCompiler
     implementation AndoidXRoom.roomKtx
+    implementation AndoidXRoom.roomCommon
 
     implementation DaggerHilt.core
 
     implementation Coroutine.coroutineCore
+    implementation CommonLibs.timber
 
+    implementation Paging3.pagingKtx
 }

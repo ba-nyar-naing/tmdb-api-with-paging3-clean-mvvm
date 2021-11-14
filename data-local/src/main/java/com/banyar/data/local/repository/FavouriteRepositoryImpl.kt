@@ -6,7 +6,6 @@ import com.banyar.data.local.mapper.toEntity
 import com.banyar.domain.model.Favourite
 import com.banyar.domain.model.Result
 import com.banyar.domain.repository.FavouriteRepository
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 

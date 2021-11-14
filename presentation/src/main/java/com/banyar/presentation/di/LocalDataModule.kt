@@ -1,6 +1,8 @@
 package com.banyar.presentation.di
 
+import com.banyar.data.local.repository.CachedMoviesRepositoryImpl
 import com.banyar.data.local.repository.FavouriteRepositoryImpl
+import com.banyar.domain.repository.CachedMoviesRepository
 import com.banyar.domain.repository.FavouriteRepository
 import dagger.Module
 import dagger.Provides
@@ -17,4 +19,10 @@ internal object LocalDataModule {
     fun provideFavouriteRepo(
         repositoryImpl: FavouriteRepositoryImpl
     ): FavouriteRepository = repositoryImpl
+
+    @Provides
+    @Singleton
+    fun provideCachedMoviesRepo(
+        repositoryImpl: CachedMoviesRepositoryImpl
+    ): CachedMoviesRepository = repositoryImpl
 }

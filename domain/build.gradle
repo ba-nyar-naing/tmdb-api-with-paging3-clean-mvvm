@@ -15,4 +15,6 @@ dependencies {
     implementation Coroutine.coroutineCore
 
     implementation Paging3.commonKtx
+
+    implementation AndoidXRoom.roomCommon
 }

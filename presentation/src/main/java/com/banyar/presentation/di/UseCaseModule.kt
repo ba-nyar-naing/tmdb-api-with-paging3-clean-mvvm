@@ -1,5 +1,6 @@
 package com.banyar.presentation.di
 
+import com.banyar.domain.repository.CachedMoviesRepository
 import com.banyar.domain.repository.FavouriteRepository
 import com.banyar.domain.repository.MoviesRepository
 import com.banyar.domain.usecase.*
@@ -43,12 +44,18 @@ internal object UseCaseModule {
         repository: MoviesRepository
     ): GetDetailsUC = GetDetailsUCImpl(repository)
 
-
     @Provides
     @Singleton
     fun provideGetPopularUseCase(
         repository: MoviesRepository
     ): GetPopularUC = GetPopularUCImpl(repository)
+
+    @Provides
+    @Singleton
+    fun provideGetPopularMediatorUseCase(
+        cachedMoviesRepository: CachedMoviesRepository,
+        repository: MoviesRepository
+    ): GetPopularMediatorUC = GetPopularMediatorUCImpl(repository, cachedMoviesRepository)
 
     @Provides
     @Singleton

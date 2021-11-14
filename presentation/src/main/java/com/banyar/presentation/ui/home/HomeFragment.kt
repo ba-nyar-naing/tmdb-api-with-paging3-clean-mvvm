@@ -44,14 +44,14 @@ class HomeFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        setupFavouriteAdapter()
+//        setupFavouriteAdapter()
     }
 
     override fun setupUIElements() {
         setActionBarTitle("Home")
 
         setupPopularAdapter()
-        setupUpcomingAdapter()
+//        setupUpcomingAdapter()
     }
 
     override fun setupObserver() {
