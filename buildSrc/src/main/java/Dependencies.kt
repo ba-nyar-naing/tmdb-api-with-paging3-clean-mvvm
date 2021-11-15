@@ -80,7 +80,7 @@ object Material {
 
 object Paging3 {
     const val pagingKtx = "androidx.paging:paging-runtime-ktx:3.1.0-beta01"
-    const val commonKtx = "androidx.paging:paging-common-ktx:3.0.1"
+    const val commonKtx = "androidx.paging:paging-common-ktx:3.1.0-beta01"
 }
 
 object Image {

@@ -17,6 +17,4 @@ dependencies {
     implementation DaggerHilt.core
 
     implementation Coroutine.coroutineCore
-
-    implementation Paging3.commonKtx
 }

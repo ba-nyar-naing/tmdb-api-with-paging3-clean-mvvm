@@ -16,7 +16,6 @@ class CachedMoviesRepositoryImpl @Inject constructor(
 ) : CachedMoviesRepository {
 
     override fun insertAll(movieDetails: List<MovieDetails>) = flow {
-        println("insertAll")
         movieDetails.map {
             movieDAO.insert(it)
         }
@@ -34,15 +33,14 @@ class CachedMoviesRepositoryImpl @Inject constructor(
     }
 
     override fun insertAllRemoteKeys(remoteKeys: List<RemoteKey>) = flow {
-        println("insert remote key")
         remoteKeys.map {
             remoteKeyDao.insert(it.toEntity())
         }
         emit(1L)
     }
 
-    override fun remoteKeysRepoId(repoId: Int) = flow {
-        val key = remoteKeyDao.remoteKeysRepoId(repoId)
+    override fun remoteKeysRepoId(movieId: Int) = flow {
+        val key = remoteKeyDao.remoteKeysRepoId(movieId)
         val keyDomain = key?.toDomain()!!
         emit(keyDomain)
     }

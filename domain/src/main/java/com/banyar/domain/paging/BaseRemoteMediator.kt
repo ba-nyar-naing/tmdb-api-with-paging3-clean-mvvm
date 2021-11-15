@@ -91,11 +91,8 @@ abstract class BaseRemoteMediator(
                 RemoteKey(repoId = it.id, prevKey = prevKey, nextKey = nextKey)
             }
 
-            println("insertAllRemoteKeys")
-            var insert = cachedMoviesRepository.insertAllRemoteKeys(keys).firstOrNull()
-            println("insert=>$insert")
-            insert = cachedMoviesRepository.insertAll(movies).firstOrNull()
-            println("insert=>$insert")
+            cachedMoviesRepository.insertAllRemoteKeys(keys).firstOrNull()
+            cachedMoviesRepository.insertAll(movies).firstOrNull()
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: IOException) {
             return MediatorResult.Error(exception)

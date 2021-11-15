@@ -14,7 +14,7 @@ interface MovieDAO {
 //    suspend fun insertAll(users: List<MovieEntity>)
     suspend fun insert(movieDetails: MovieDetails): Long
 
-    @Query("SELECT * FROM movies")
+    @Query("SELECT * FROM movies ORDER BY pagingId ASC")
 //    fun pagingSource(title: String): PagingSource<Int, MovieEntity>
     fun pagingSource(): PagingSource<Int, MovieDetails>
 

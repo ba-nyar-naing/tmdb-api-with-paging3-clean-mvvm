@@ -17,5 +17,5 @@ interface CachedMoviesRepository {
 
     fun insertAllRemoteKeys(remoteKeys: List<RemoteKey>): Flow<Long>
 
-    fun remoteKeysRepoId(repoId: Int): Flow<RemoteKey>
+    fun remoteKeysRepoId(movieId: Int): Flow<RemoteKey>
 }

@@ -9,7 +9,6 @@ import com.banyar.domain.paging.BaseRemoteMediator
 import com.banyar.domain.repository.CachedMoviesRepository
 import com.banyar.domain.repository.MoviesRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.first
 
 interface GetPopularMediatorUC : BaseUseCase<Any, Flow<PagingData<MovieDetails>>>
 

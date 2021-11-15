@@ -5,7 +5,7 @@ apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     defaultConfig {
-        applicationId "com.banyar.presentation"
+        applicationId "com.banyar.tmdb"
 
         compileSdk BuildConfig.targetSdk
         targetSdk BuildConfig.targetSdk

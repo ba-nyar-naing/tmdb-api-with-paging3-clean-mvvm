@@ -11,7 +11,7 @@ data class MovieDetails(
     var budget: Int? = null,
     @Ignore var genres: List<Genre>? = null,
     var homepage: String? = null,
-    @PrimaryKey var id: Int? = null,
+    var id: Int? = null,
     var imdbId: String? = null,
     var originalLanguage: String? = null,
     var originalTitle: String? = null,
@@ -27,6 +27,7 @@ data class MovieDetails(
     var video: Boolean? = null,
     var voteAverage: Double? = null,
     var voteCount: Int? = null,
+    @PrimaryKey(autoGenerate = true) var pagingId: Int = 0,
 )
 
 fun MovieDetails.toFavourite() = Favourite(

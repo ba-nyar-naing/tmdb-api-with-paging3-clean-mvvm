@@ -14,5 +14,5 @@ internal fun FavouriteEntity.toDomain(): Favourite {
 //}
 
 internal fun RemoteKeyEntity.toDomain(): RemoteKey {
-    return RemoteKey(repoId, prevKey, nextKey)
+    return RemoteKey(movieId, prevKey, nextKey)
 }
