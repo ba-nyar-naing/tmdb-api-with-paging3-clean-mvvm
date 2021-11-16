@@ -4,7 +4,7 @@ import com.banyar.domain.model.MovieDetails
 import com.banyar.domain.model.PopularMovies
 import kotlinx.coroutines.flow.Flow
 
-interface MoviesRepository {
+interface RemoteMoviesRepository {
 
     fun getDetails(id: Int): Flow<MovieDetails>
 

@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.banyar.data.local.TMDBDatabase
 import com.banyar.data.local.dao.FavouriteDAO
-import com.banyar.data.local.dao.MovieDAO
-import com.banyar.data.local.dao.RemoteKeyDao
+import com.banyar.data.local.dao.PopularMovieDAO
+import com.banyar.data.local.dao.RemoteKeyDAO
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -31,9 +31,9 @@ internal object DatabaseModule {
 
     @Provides
     @Singleton
-    fun provideMovieDao(db: TMDBDatabase): MovieDAO = db.movieDao()
+    fun providePopularMovieDao(db: TMDBDatabase): PopularMovieDAO = db.popularMovieDAO()
 
     @Provides
     @Singleton
-    fun provideRemoteKeyDao(db: TMDBDatabase): RemoteKeyDao = db.remoteKeyDao()
+    fun provideRemoteKeyDao(db: TMDBDatabase): RemoteKeyDAO = db.remoteKeyDao()
 }

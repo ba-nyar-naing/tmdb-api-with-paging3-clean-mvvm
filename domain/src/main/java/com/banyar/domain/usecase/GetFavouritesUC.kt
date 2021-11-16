@@ -2,14 +2,14 @@ package com.banyar.domain.usecase
 
 import androidx.paging.*
 import com.banyar.domain.model.Favourite
-import com.banyar.domain.repository.FavouriteRepository
+import com.banyar.domain.repository.LocalFavouritesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 
 interface GetFavouritesUC : BaseUseCase<Any, Flow<PagingData<Favourite>>>
 
 class GetFavouritesUCImpl(
-    private val repository: FavouriteRepository
+    private val repository: LocalFavouritesRepository
 ) : GetFavouritesUC {
 
     override suspend fun invoke(params: Any) =
@@ -24,7 +24,7 @@ class GetFavouritesUCImpl(
 private const val PAGE_SIZE = 10
 
 class FavouriteMoviesPagingSource(
-    private val repository: FavouriteRepository
+    private val repository: LocalFavouritesRepository
 ) : PagingSource<Int, Favourite>() {
 
     override fun getRefreshKey(state: PagingState<Int, Favourite>): Int? = state.anchorPosition

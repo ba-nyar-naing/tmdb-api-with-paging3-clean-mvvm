@@ -1,7 +1,7 @@
 package com.banyar.presentation.di
 
-import com.banyar.data.remote.repository.MoviesRepositoryImpl
-import com.banyar.domain.repository.MoviesRepository
+import com.banyar.data.remote.repository.RemoteMoviesRepositoryImpl
+import com.banyar.domain.repository.RemoteMoviesRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,6 +15,6 @@ internal object RemoteDataModule {
     @Provides
     @Singleton
     fun provideMoviesRepo(
-        repositoryImpl: MoviesRepositoryImpl
-    ): MoviesRepository = repositoryImpl
+        repositoryImpl: RemoteMoviesRepositoryImpl
+    ): RemoteMoviesRepository = repositoryImpl
 }

@@ -1,8 +1,9 @@
 package com.banyar.presentation.di
 
-import com.banyar.domain.repository.CachedMoviesRepository
-import com.banyar.domain.repository.FavouriteRepository
-import com.banyar.domain.repository.MoviesRepository
+import com.banyar.domain.repository.LocalFavouritesRepository
+import com.banyar.domain.repository.LocalPopularMoviesRepository
+import com.banyar.domain.repository.LocalRemoteKeyRepository
+import com.banyar.domain.repository.RemoteMoviesRepository
 import com.banyar.domain.usecase.*
 import dagger.Module
 import dagger.Provides
@@ -17,49 +18,55 @@ internal object UseCaseModule {
     @Provides
     @Singleton
     fun provideDeleteFavouriteUseCase(
-        repository: FavouriteRepository
+        repository: LocalFavouritesRepository
     ): DeleteFavouriteUC = DeleteFavouriteUCImpl(repository)
 
     @Provides
     @Singleton
     fun provideInsertFavouriteUseCase(
-        repository: FavouriteRepository
+        repository: LocalFavouritesRepository
     ): InsertFavouriteUC = InsertFavouriteUCImpl(repository)
 
     @Provides
     @Singleton
     fun provideGetFavouriteStatUseCase(
-        repository: FavouriteRepository
+        repository: LocalFavouritesRepository
     ): GetFavouriteStatUC = GetFavouriteStatUCImpl(repository)
 
     @Provides
     @Singleton
     fun provideGetFavouritesUseCase(
-        repository: FavouriteRepository
+        repository: LocalFavouritesRepository
     ): GetFavouritesUC = GetFavouritesUCImpl(repository)
 
     @Provides
     @Singleton
     fun provideGetDetailsUseCase(
-        repository: MoviesRepository
+        repository: RemoteMoviesRepository
     ): GetDetailsUC = GetDetailsUCImpl(repository)
 
     @Provides
     @Singleton
     fun provideGetPopularUseCase(
-        repository: MoviesRepository
+        repository: RemoteMoviesRepository
     ): GetPopularUC = GetPopularUCImpl(repository)
 
     @Provides
     @Singleton
     fun provideGetPopularMediatorUseCase(
-        cachedMoviesRepository: CachedMoviesRepository,
-        repository: MoviesRepository
-    ): GetPopularMediatorUC = GetPopularMediatorUCImpl(repository, cachedMoviesRepository)
+        remoteMoviesRepository: RemoteMoviesRepository,
+        localPopularMoviesRepository: LocalPopularMoviesRepository,
+        localRemoteKeyRepository: LocalRemoteKeyRepository,
+    ): GetPopularMediatorUC =
+        GetPopularMediatorUCImpl(
+            remoteMoviesRepository,
+            localPopularMoviesRepository,
+            localRemoteKeyRepository
+        )
 
     @Provides
     @Singleton
     fun provideGetUpcomingUseCase(
-        repository: MoviesRepository
+        repository: RemoteMoviesRepository
     ): GetUpcomingUC = GetUpcomingUCImpl(repository)
 }

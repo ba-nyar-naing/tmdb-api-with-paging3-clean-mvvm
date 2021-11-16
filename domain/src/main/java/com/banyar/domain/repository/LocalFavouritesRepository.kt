@@ -4,7 +4,7 @@ import com.banyar.domain.model.Favourite
 import com.banyar.domain.model.Result
 import kotlinx.coroutines.flow.Flow
 
-interface FavouriteRepository {
+interface LocalFavouritesRepository {
 
     fun getFavourites(pageSize: Int, pageIndex: Int): Flow<List<Favourite>>
 

@@ -7,7 +7,7 @@ import androidx.room.Query
 import com.banyar.data.local.model.RemoteKeyEntity
 
 @Dao
-interface RemoteKeyDao {
+interface RemoteKeyDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(remoteKey: RemoteKeyEntity): Long
@@ -16,5 +16,5 @@ interface RemoteKeyDao {
     suspend fun remoteKeysRepoId(movieId: Int): RemoteKeyEntity?
 
     @Query("DELETE FROM remote_keys")
-    suspend fun clearRemoteKeys()
+    suspend fun deleteAll()
 }

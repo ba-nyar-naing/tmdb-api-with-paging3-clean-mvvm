@@ -6,15 +6,17 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import com.banyar.domain.model.MovieDetails
 import com.banyar.domain.paging.BaseRemoteMediator
-import com.banyar.domain.repository.CachedMoviesRepository
-import com.banyar.domain.repository.MoviesRepository
+import com.banyar.domain.repository.LocalPopularMoviesRepository
+import com.banyar.domain.repository.LocalRemoteKeyRepository
+import com.banyar.domain.repository.RemoteMoviesRepository
 import kotlinx.coroutines.flow.Flow
 
 interface GetPopularMediatorUC : BaseUseCase<Any, Flow<PagingData<MovieDetails>>>
 
 class GetPopularMediatorUCImpl(
-    private val moviesRepository: MoviesRepository,
-    private val cachedMoviesRepository: CachedMoviesRepository,
+    private val remoteMoviesRepository: RemoteMoviesRepository,
+    private val localPopularMoviesRepository: LocalPopularMoviesRepository,
+    private val localRemoteKeyRepository: LocalRemoteKeyRepository,
 ) : GetPopularMediatorUC {
 
     @OptIn(ExperimentalPagingApi::class)
@@ -22,12 +24,13 @@ class GetPopularMediatorUCImpl(
         return Pager(
             config = PagingConfig(pageSize = 20, enablePlaceholders = false),
             remoteMediator = PopularMoviesMediatorPagingSource(
-                cachedMoviesRepository,
-                moviesRepository
+                localPopularMoviesRepository,
+                localRemoteKeyRepository,
+                remoteMoviesRepository
             ),
             pagingSourceFactory = {
                 // FIXME: 11/15/21 avoid accessing database on the main thread
-                cachedMoviesRepository.pagingSource()
+                localPopularMoviesRepository.pagingSource()
             }
         ).flow
     }
@@ -35,10 +38,11 @@ class GetPopularMediatorUCImpl(
 }
 
 class PopularMoviesMediatorPagingSource(
-    cachedMoviesRepository: CachedMoviesRepository,
-    moviesRepository: MoviesRepository,
+    localPopularMoviesRepository: LocalPopularMoviesRepository,
+    localRemoteKeyRepository: LocalRemoteKeyRepository,
+    remoteMoviesRepository: RemoteMoviesRepository,
 ) : BaseRemoteMediator(
-    "",
-    cachedMoviesRepository,
-    moviesRepository
+    localPopularMoviesRepository,
+    localRemoteKeyRepository,
+    remoteMoviesRepository,
 )

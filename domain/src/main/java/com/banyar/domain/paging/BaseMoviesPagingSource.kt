@@ -3,7 +3,7 @@ package com.banyar.domain.paging
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.banyar.domain.model.MovieDetails
-import com.banyar.domain.repository.MoviesRepository
+import com.banyar.domain.repository.RemoteMoviesRepository
 import kotlinx.coroutines.flow.first
 
 enum class MovieSourceType {
@@ -13,7 +13,7 @@ enum class MovieSourceType {
 
 abstract class BaseMoviesPagingSource(
     private val source: MovieSourceType,
-    private val repository: MoviesRepository
+    private val repository: RemoteMoviesRepository
 ) : PagingSource<Int, MovieDetails>() {
 
     override fun getRefreshKey(state: PagingState<Int, MovieDetails>): Int? = state.anchorPosition

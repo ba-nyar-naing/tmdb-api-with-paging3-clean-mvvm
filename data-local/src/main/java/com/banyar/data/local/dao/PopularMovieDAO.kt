@@ -8,7 +8,7 @@ import androidx.room.Query
 import com.banyar.domain.model.MovieDetails
 
 @Dao
-interface MovieDAO {
+interface PopularMovieDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
 //    suspend fun insertAll(users: List<MovieEntity>)

@@ -4,14 +4,14 @@ import com.banyar.data.remote.api.TMDBApiService
 import com.banyar.data.remote.mapper.toDomain
 import com.banyar.domain.model.MovieDetails
 import com.banyar.domain.model.PopularMovies
-import com.banyar.domain.repository.MoviesRepository
+import com.banyar.domain.repository.RemoteMoviesRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class MoviesRepositoryImpl @Inject constructor(
+class RemoteMoviesRepositoryImpl @Inject constructor(
     private val tmdbService: TMDBApiService
-) : MoviesRepository {
+) : RemoteMoviesRepository {
 
     override fun getDetails(id: Int): Flow<MovieDetails> = flow {
         val response = tmdbService.getDetails(id)

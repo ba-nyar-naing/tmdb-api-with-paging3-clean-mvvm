@@ -5,13 +5,13 @@ import com.banyar.data.local.mapper.toDomain
 import com.banyar.data.local.mapper.toEntity
 import com.banyar.domain.model.Favourite
 import com.banyar.domain.model.Result
-import com.banyar.domain.repository.FavouriteRepository
+import com.banyar.domain.repository.LocalFavouritesRepository
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
-class FavouriteRepositoryImpl @Inject constructor(
+class LocalFavouritesRepositoryImpl @Inject constructor(
     private val favouriteDAO: FavouriteDAO
-) : FavouriteRepository {
+) : LocalFavouritesRepository {
 
     override fun getFavourites(pageSize: Int, pageIndex: Int) = flow {
         val result = favouriteDAO.get(pageSize, pageIndex)
