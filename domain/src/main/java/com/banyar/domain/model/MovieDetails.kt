@@ -25,6 +25,7 @@ data class MovieDetails(
     var video: Boolean? = null,
     var voteAverage: Double? = null,
     var voteCount: Int? = null,
+    @ColumnInfo(name = "category") var category: String? = null,
     @ColumnInfo(name = "paging_id") var pagingId: Int? = null,
 )
 

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.banyar.data.local.TMDBDatabase
 import com.banyar.data.local.dao.FavouriteDAO
-import com.banyar.data.local.dao.PopularMovieDAO
+import com.banyar.data.local.dao.PaginatedMovieDAO
 import com.banyar.data.local.dao.RemoteKeyDAO
 import dagger.Module
 import dagger.Provides
@@ -31,7 +31,7 @@ internal object DatabaseModule {
 
     @Provides
     @Singleton
-    fun providePopularMovieDao(db: TMDBDatabase): PopularMovieDAO = db.popularMovieDAO()
+    fun providePopularMovieDao(db: TMDBDatabase): PaginatedMovieDAO = db.popularMovieDAO()
 
     @Provides
     @Singleton

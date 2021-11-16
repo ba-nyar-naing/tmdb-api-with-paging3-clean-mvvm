@@ -12,37 +12,37 @@ import com.banyar.domain.repository.LocalRemoteKeyRepository
 import com.banyar.domain.repository.RemoteMoviesRepository
 import kotlinx.coroutines.flow.Flow
 
-interface GetPopularMediatorUC : BaseUseCase<Any, Flow<PagingData<MovieDetails>>>
+interface GetUpcomingMediatorUC : BaseUseCase<Any, Flow<PagingData<MovieDetails>>>
 
-class GetPopularMediatorUCImpl(
+class GetUpcomingMediatorUCImpl(
     private val remoteMoviesRepository: RemoteMoviesRepository,
     private val localPaginatedMoviesRepository: LocalPaginatedMoviesRepository,
     private val localRemoteKeyRepository: LocalRemoteKeyRepository,
-) : GetPopularMediatorUC {
+) : GetUpcomingMediatorUC {
 
     @OptIn(ExperimentalPagingApi::class)
     override suspend fun invoke(params: Any): Flow<PagingData<MovieDetails>> {
         return Pager(
             config = PagingConfig(pageSize = 20, enablePlaceholders = false),
-            remoteMediator = PopularMoviesMediatorPagingSource(
+            remoteMediator = UpcomingMoviesMediatorPagingSource(
                 localPaginatedMoviesRepository,
                 localRemoteKeyRepository,
                 remoteMoviesRepository
             ),
             pagingSourceFactory = {
                 // FIXME: 11/15/21 avoid accessing database on the main thread
-                localPaginatedMoviesRepository.pagingSource(MovieSourceType.POPULAR)
+                localPaginatedMoviesRepository.pagingSource(MovieSourceType.UPCOMING)
             }
         ).flow
     }
 }
 
-class PopularMoviesMediatorPagingSource(
+class UpcomingMoviesMediatorPagingSource(
     localPaginatedMoviesRepository: LocalPaginatedMoviesRepository,
     localRemoteKeyRepository: LocalRemoteKeyRepository,
     remoteMoviesRepository: RemoteMoviesRepository,
 ) : BaseRemoteMediator(
-    MovieSourceType.POPULAR,
+    MovieSourceType.UPCOMING,
     localPaginatedMoviesRepository,
     localRemoteKeyRepository,
     remoteMoviesRepository,

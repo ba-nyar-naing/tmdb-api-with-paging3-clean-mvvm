@@ -1,7 +1,7 @@
 package com.banyar.presentation.di
 
 import com.banyar.domain.repository.LocalFavouritesRepository
-import com.banyar.domain.repository.LocalPopularMoviesRepository
+import com.banyar.domain.repository.LocalPaginatedMoviesRepository
 import com.banyar.domain.repository.LocalRemoteKeyRepository
 import com.banyar.domain.repository.RemoteMoviesRepository
 import com.banyar.domain.usecase.*
@@ -47,26 +47,27 @@ internal object UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideGetPopularUseCase(
-        repository: RemoteMoviesRepository
-    ): GetPopularUC = GetPopularUCImpl(repository)
-
-    @Provides
-    @Singleton
     fun provideGetPopularMediatorUseCase(
         remoteMoviesRepository: RemoteMoviesRepository,
-        localPopularMoviesRepository: LocalPopularMoviesRepository,
+        localPaginatedMoviesRepository: LocalPaginatedMoviesRepository,
         localRemoteKeyRepository: LocalRemoteKeyRepository,
     ): GetPopularMediatorUC =
         GetPopularMediatorUCImpl(
             remoteMoviesRepository,
-            localPopularMoviesRepository,
+            localPaginatedMoviesRepository,
             localRemoteKeyRepository
         )
 
     @Provides
     @Singleton
-    fun provideGetUpcomingUseCase(
-        repository: RemoteMoviesRepository
-    ): GetUpcomingUC = GetUpcomingUCImpl(repository)
+    fun provideGetUpcomingMediatorUseCase(
+        remoteMoviesRepository: RemoteMoviesRepository,
+        localPaginatedMoviesRepository: LocalPaginatedMoviesRepository,
+        localRemoteKeyRepository: LocalRemoteKeyRepository,
+    ): GetUpcomingMediatorUC =
+        GetUpcomingMediatorUCImpl(
+            remoteMoviesRepository,
+            localPaginatedMoviesRepository,
+            localRemoteKeyRepository
+        )
 }

@@ -4,10 +4,11 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "popular_movies")
-data class PopularMovieEntity(
+@Entity(tableName = "paginated_movies")
+data class PaginatedMovieEntity(
     @ColumnInfo(name = "title") val title: String,
     @ColumnInfo(name = "poster_path") val posterPath: String,
     @ColumnInfo(name = "movie_id") val movieId: Int,
+    @ColumnInfo(name = "category") val category: String,
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "paging_id") val pagingId: Int = 0,
 )

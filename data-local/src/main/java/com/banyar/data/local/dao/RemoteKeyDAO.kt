@@ -12,9 +12,9 @@ interface RemoteKeyDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(remoteKey: RemoteKeyEntity): Long
 
-    @Query("SELECT * FROM remote_keys WHERE movieId = :movieId")
-    suspend fun getRemoteKey(movieId: Int): RemoteKeyEntity?
+    @Query("SELECT * FROM remote_keys WHERE category = :category AND movieId = :movieId")
+    suspend fun getRemoteKey(category: String, movieId: Int): RemoteKeyEntity?
 
-    @Query("DELETE FROM remote_keys")
-    suspend fun deleteAll()
+    @Query("DELETE FROM remote_keys WHERE category = :category")
+    suspend fun deleteAll(category: String)
 }

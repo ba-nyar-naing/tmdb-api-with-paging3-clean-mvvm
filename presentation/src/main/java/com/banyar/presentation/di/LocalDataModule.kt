@@ -1,10 +1,10 @@
 package com.banyar.presentation.di
 
 import com.banyar.data.local.repository.LocalFavouritesRepositoryImpl
-import com.banyar.data.local.repository.PopularMoviesRepositoryImpl
+import com.banyar.data.local.repository.PaginatedMoviesRepositoryImpl
 import com.banyar.data.local.repository.LocalRemoteKeyRepositoryImpl
 import com.banyar.domain.repository.LocalFavouritesRepository
-import com.banyar.domain.repository.LocalPopularMoviesRepository
+import com.banyar.domain.repository.LocalPaginatedMoviesRepository
 import com.banyar.domain.repository.LocalRemoteKeyRepository
 import dagger.Module
 import dagger.Provides
@@ -25,8 +25,8 @@ internal object LocalDataModule {
     @Provides
     @Singleton
     fun providePopularMovieRepo(
-        repositoryImpl: PopularMoviesRepositoryImpl
-    ): LocalPopularMoviesRepository = repositoryImpl
+        repositoryImpl: PaginatedMoviesRepositoryImpl
+    ): LocalPaginatedMoviesRepository = repositoryImpl
 
     @Provides
     @Singleton
