@@ -9,5 +9,5 @@ interface LocalRemoteKeyRepository {
 
     fun clearAll(): Flow<Unit>
 
-    fun getRemoteKey(movieId: Int): Flow<RemoteKey>
+    fun getRemoteKey(movieId: Int): Flow<RemoteKey?>
 }

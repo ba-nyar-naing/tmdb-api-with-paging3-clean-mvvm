@@ -1,7 +1,7 @@
 package com.banyar.presentation.di
 
 import com.banyar.data.local.repository.LocalFavouritesRepositoryImpl
-import com.banyar.data.local.repository.LocalPopularMoviesRepositoryImpl
+import com.banyar.data.local.repository.PopularMoviesRepositoryImpl
 import com.banyar.data.local.repository.LocalRemoteKeyRepositoryImpl
 import com.banyar.domain.repository.LocalFavouritesRepository
 import com.banyar.domain.repository.LocalPopularMoviesRepository
@@ -25,7 +25,7 @@ internal object LocalDataModule {
     @Provides
     @Singleton
     fun providePopularMovieRepo(
-        repositoryImpl: LocalPopularMoviesRepositoryImpl
+        repositoryImpl: PopularMoviesRepositoryImpl
     ): LocalPopularMoviesRepository = repositoryImpl
 
     @Provides

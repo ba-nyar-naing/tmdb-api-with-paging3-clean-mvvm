@@ -22,8 +22,8 @@ class LocalRemoteKeyRepositoryImpl @Inject constructor(
     }
 
     override fun getRemoteKey(movieId: Int) = flow {
-        val key = remoteKeyDAO.remoteKeysRepoId(movieId)
-        val keyDomain = key?.toDomain()!!
+        val key = remoteKeyDAO.getRemoteKey(movieId)
+        val keyDomain = key?.toDomain()
         emit(keyDomain)
     }
 }

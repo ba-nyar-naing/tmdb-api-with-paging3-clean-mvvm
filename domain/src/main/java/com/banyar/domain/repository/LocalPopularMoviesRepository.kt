@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface LocalPopularMoviesRepository {
 
-    fun insertAll(movieDetails: List<MovieDetails>): Flow<Unit>
+    fun insertAll(movies: List<MovieDetails>): Flow<Unit>
 
     fun clearAll(): Flow<Unit>
 

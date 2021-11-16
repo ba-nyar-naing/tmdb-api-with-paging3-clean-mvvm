@@ -74,7 +74,7 @@ abstract class BaseRemoteMediator(
             val prevKey = if (page == 1) null else page - 1
             val nextKey = if (endOfPaginationReached) null else page + 1
             val remoteKeys = movies.map {
-                RemoteKey(repoId = it.id, prevKey = prevKey, nextKey = nextKey)
+                RemoteKey(movieId = it.id, prevKey = prevKey, nextKey = nextKey)
             }
 
             localRemoteKeyRepository.insertAll(remoteKeys).first()

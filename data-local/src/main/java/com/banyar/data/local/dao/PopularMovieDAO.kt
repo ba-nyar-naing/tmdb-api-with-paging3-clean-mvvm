@@ -5,19 +5,18 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.banyar.data.local.model.PopularMovieEntity
 import com.banyar.domain.model.MovieDetails
 
 @Dao
 interface PopularMovieDAO {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-//    suspend fun insertAll(users: List<MovieEntity>)
-    suspend fun insert(movieDetails: MovieDetails): Long
+    suspend fun insert(popularMovieEntity: PopularMovieEntity): Long
 
-    @Query("SELECT * FROM movies ORDER BY pagingId ASC")
-//    fun pagingSource(title: String): PagingSource<Int, MovieEntity>
+    @Query("SELECT * FROM popular_movies ORDER BY paging_id ASC")
     fun pagingSource(): PagingSource<Int, MovieDetails>
 
-    @Query("DELETE FROM movies")
-    suspend fun clearAll()
+    @Query("DELETE FROM popular_movies")
+    suspend fun deleteAll()
 }
