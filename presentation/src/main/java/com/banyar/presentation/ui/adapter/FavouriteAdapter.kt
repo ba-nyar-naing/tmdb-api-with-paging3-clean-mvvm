@@ -12,7 +12,7 @@ import com.banyar.domain.model.Favourite
 import com.banyar.presentation.R
 import com.banyar.presentation.databinding.ItemMovieBinding
 
-class FavouritesAdapter : PagingDataAdapter<Favourite, FavouritesAdapter.ViewHolder>(DataDiffer) {
+class FavouriteAdapter : PagingDataAdapter<Favourite, FavouriteAdapter.ViewHolder>(DataDiffer) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemMovieBinding.inflate(

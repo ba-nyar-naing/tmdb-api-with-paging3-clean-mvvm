@@ -11,9 +11,10 @@ import androidx.navigation.fragment.findNavController
 import com.banyar.domain.paging.MovieSourceType
 import com.banyar.presentation.R
 import com.banyar.presentation.databinding.FragmentHomeBinding
-import com.banyar.presentation.ui.adapter.FavouritesAdapter
+import com.banyar.presentation.ui.adapter.CategoryAdapter
+import com.banyar.presentation.ui.adapter.FavouriteAdapter
 import com.banyar.presentation.ui.adapter.LoadingStateAdapter
-import com.banyar.presentation.ui.adapter.MoviesAdapter
+import com.banyar.presentation.ui.adapter.MovieAdapter
 import com.banyar.presentation.ui.base.BaseFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -25,9 +26,10 @@ class HomeFragment : BaseFragment() {
 
     private val viewModel: HomeVM by viewModels()
 
-    private var popularAdapter: MoviesAdapter? = null
-    private var upcomingAdapter: MoviesAdapter? = null
-    private var favouriteAdapter: FavouritesAdapter? = null
+    private var categoryAdapter: CategoryAdapter? = null
+    private var popularAdapter: MovieAdapter? = null
+    private var upcomingAdapter: MovieAdapter? = null
+    private var favouriteAdapter: FavouriteAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -50,8 +52,9 @@ class HomeFragment : BaseFragment() {
     override fun setupUIElements() {
         setActionBarTitle("Home")
 
-        setupPopularAdapter()
-        setupUpcomingAdapter()
+//        setupPopularAdapter()
+//        setupUpcomingAdapter()
+        setupCategoryAdapter()
     }
 
     override fun setupObserver() {
@@ -79,7 +82,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setupPopularAdapter() {
-        popularAdapter = MoviesAdapter()
+        popularAdapter = MovieAdapter()
 
         binding.rcvPopular.apply {
             adapter = popularAdapter?.withLoadStateFooter(
@@ -95,7 +98,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setupUpcomingAdapter() {
-        upcomingAdapter = MoviesAdapter()
+        upcomingAdapter = MovieAdapter()
 
         binding.rcvUpcoming.apply {
             adapter = upcomingAdapter?.withLoadStateFooter(
@@ -111,7 +114,7 @@ class HomeFragment : BaseFragment() {
     }
 
     private fun setupFavouriteAdapter() {
-        favouriteAdapter = FavouritesAdapter()
+        favouriteAdapter = FavouriteAdapter()
 
         binding.rcvFavourite.apply {
             adapter = favouriteAdapter?.withLoadStateFooter(
@@ -122,6 +125,22 @@ class HomeFragment : BaseFragment() {
         lifecycleScope.launch {
             viewModel.getFavouritePagingData().collect { last ->
                 favouriteAdapter?.submitData(last)
+            }
+        }
+    }
+
+    private fun setupCategoryAdapter() {
+        categoryAdapter = CategoryAdapter(lifecycleScope)
+
+        binding.rcvCategory.apply {
+            adapter = categoryAdapter?.withLoadStateFooter(
+                footer = LoadingStateAdapter()
+            )
+        }
+
+        lifecycleScope.launch {
+            viewModel.getCategoryPagingData().collect { last ->
+                categoryAdapter?.submitData(last)
             }
         }
     }

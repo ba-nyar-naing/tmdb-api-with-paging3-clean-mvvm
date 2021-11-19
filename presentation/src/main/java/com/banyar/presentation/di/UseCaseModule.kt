@@ -70,4 +70,14 @@ internal object UseCaseModule {
             localPaginatedMoviesRepository,
             localRemoteKeyRepository
         )
+
+    @Provides
+    @Singleton
+    fun provideGetCategoriesUseCase(
+        popularMediatorUC: GetPopularMediatorUC,
+        upcomingMediatorUC: GetUpcomingMediatorUC,
+    ): GetCategoriesUC = GetCategoriesUCImpl(
+        popularMediatorUC, upcomingMediatorUC
+    )
+
 }

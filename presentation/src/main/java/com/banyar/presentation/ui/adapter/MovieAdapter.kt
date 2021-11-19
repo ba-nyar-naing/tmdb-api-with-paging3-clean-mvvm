@@ -12,7 +12,7 @@ import com.banyar.domain.model.MovieDetails
 import com.banyar.presentation.R
 import com.banyar.presentation.databinding.ItemMovieBinding
 
-class MoviesAdapter : PagingDataAdapter<MovieDetails, MoviesAdapter.ViewHolder>(DataDiffer) {
+class MovieAdapter : PagingDataAdapter<MovieDetails, MovieAdapter.ViewHolder>(DataDiffer) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemMovieBinding.inflate(

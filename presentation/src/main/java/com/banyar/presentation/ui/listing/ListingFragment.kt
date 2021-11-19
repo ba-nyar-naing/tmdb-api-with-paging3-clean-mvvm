@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.banyar.domain.paging.MovieSourceType
 import com.banyar.presentation.databinding.FragmentListingBinding
 import com.banyar.presentation.ui.adapter.LoadingStateAdapter
-import com.banyar.presentation.ui.adapter.MoviesAdapter
+import com.banyar.presentation.ui.adapter.MovieAdapter
 import com.banyar.presentation.ui.base.BaseFragment
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -22,7 +22,7 @@ class ListingFragment : BaseFragment() {
 
     private val viewModel: ListingVM by viewModels()
 
-    private var moviesAdapter: MoviesAdapter? = null
+    private var movieAdapter: MovieAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,11 +42,11 @@ class ListingFragment : BaseFragment() {
 
         val sourceType = requireActivity().intent.getSerializableExtra("Listing") as MovieSourceType
 
-        moviesAdapter = MoviesAdapter()
+        movieAdapter = MovieAdapter()
 
         binding.rcvMovie.apply {
             layoutManager = GridLayoutManager(requireContext(), 3)
-            adapter = moviesAdapter?.withLoadStateFooter(
+            adapter = movieAdapter?.withLoadStateFooter(
                 footer = LoadingStateAdapter()
             )
         }
@@ -55,14 +55,14 @@ class ListingFragment : BaseFragment() {
             MovieSourceType.POPULAR -> {
                 lifecycleScope.launch {
                     viewModel.getPopularPagingData().collectLatest { last ->
-                        moviesAdapter?.submitData(last)
+                        movieAdapter?.submitData(last)
                     }
                 }
             }
             MovieSourceType.UPCOMING -> {
                 lifecycleScope.launch {
                     viewModel.getUpcomingPagingData().collectLatest { last ->
-                        moviesAdapter?.submitData(last)
+                        movieAdapter?.submitData(last)
                     }
                 }
             }
