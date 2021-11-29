@@ -1,78 +1,78 @@
-package com.banyar.presentation.ui.listing
-
-import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.GridLayoutManager
-import com.banyar.domain.paging.MovieSourceType
-import com.banyar.presentation.databinding.FragmentListingBinding
-import com.banyar.presentation.ui.adapter.LoadingStateAdapter
-import com.banyar.presentation.ui.adapter.MovieAdapter
-import com.banyar.presentation.ui.base.BaseFragment
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-
-class ListingFragment : BaseFragment() {
-
-    private var _binding: FragmentListingBinding? = null
-    private val binding get() = _binding!!
-
-    private val viewModel: ListingVM by viewModels()
-
-    private var movieAdapter: MovieAdapter? = null
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentListingBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onDestroyView() {
-        _binding = null
-        super.onDestroyView()
-    }
-
-    override fun setupUIElements() {
-        setActionBarTitle("Popular movies")
-
-        val sourceType = requireActivity().intent.getSerializableExtra("Listing") as MovieSourceType
-
-        movieAdapter = MovieAdapter()
-
-        binding.rcvMovie.apply {
-            layoutManager = GridLayoutManager(requireContext(), 3)
-            adapter = movieAdapter?.withLoadStateFooter(
-                footer = LoadingStateAdapter()
-            )
-        }
-
-        when (sourceType) {
-            MovieSourceType.POPULAR -> {
-                lifecycleScope.launch {
-                    viewModel.getPopularPagingData().collectLatest { last ->
-                        movieAdapter?.submitData(last)
-                    }
-                }
-            }
-            MovieSourceType.UPCOMING -> {
-                lifecycleScope.launch {
-                    viewModel.getUpcomingPagingData().collectLatest { last ->
-                        movieAdapter?.submitData(last)
-                    }
-                }
-            }
-        }
-    }
-
-    override fun setupObserver() {
-    }
-
-    override fun setupActionListener() {
-    }
-
-}
+//package com.banyar.presentation.ui.listing
+//
+//import android.os.Bundle
+//import android.view.LayoutInflater
+//import android.view.View
+//import android.view.ViewGroup
+//import androidx.fragment.app.viewModels
+//import androidx.lifecycle.lifecycleScope
+//import androidx.recyclerview.widget.GridLayoutManager
+//import com.banyar.domain.paging.MovieSourceType
+//import com.banyar.presentation.databinding.FragmentListingBinding
+//import com.banyar.presentation.ui.adapter.LoadingStateAdapter
+//import com.banyar.presentation.ui.adapter.MovieAdapter
+//import com.banyar.presentation.ui.base.BaseFragment
+//import kotlinx.coroutines.flow.collectLatest
+//import kotlinx.coroutines.launch
+//
+//class ListingFragment : BaseFragment() {
+//
+//    private var _binding: FragmentListingBinding? = null
+//    private val binding get() = _binding!!
+//
+//    private val viewModel: ListingVM by viewModels()
+//
+//    private var movieAdapter: MovieAdapter? = null
+//
+//    override fun onCreateView(
+//        inflater: LayoutInflater, container: ViewGroup?,
+//        savedInstanceState: Bundle?
+//    ): View {
+//        _binding = FragmentListingBinding.inflate(inflater, container, false)
+//        return binding.root
+//    }
+//
+//    override fun onDestroyView() {
+//        _binding = null
+//        super.onDestroyView()
+//    }
+//
+//    override fun setupUIElements() {
+//        setActionBarTitle("Popular movies")
+//
+//        val sourceType = requireActivity().intent.getSerializableExtra("Listing") as MovieSourceType
+//
+//        movieAdapter = MovieAdapter()
+//
+//        binding.rcvMovie.apply {
+//            layoutManager = GridLayoutManager(requireContext(), 3)
+//            adapter = movieAdapter?.withLoadStateFooter(
+//                footer = LoadingStateAdapter()
+//            )
+//        }
+//
+//        when (sourceType) {
+//            MovieSourceType.POPULAR -> {
+//                lifecycleScope.launch {
+//                    viewModel.getPopularPagingData().collectLatest { last ->
+//                        movieAdapter?.submitData(last)
+//                    }
+//                }
+//            }
+//            MovieSourceType.UPCOMING -> {
+//                lifecycleScope.launch {
+//                    viewModel.getUpcomingPagingData().collectLatest { last ->
+//                        movieAdapter?.submitData(last)
+//                    }
+//                }
+//            }
+//        }
+//    }
+//
+//    override fun setupObserver() {
+//    }
+//
+//    override fun setupActionListener() {
+//    }
+//
+//}

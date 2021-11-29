@@ -27,8 +27,6 @@ class HomeFragment : BaseFragment() {
     private val viewModel: HomeVM by viewModels()
 
     private var categoryAdapter: CategoryAdapter? = null
-    private var popularAdapter: MovieAdapter? = null
-    private var upcomingAdapter: MovieAdapter? = null
     private var favouriteAdapter: FavouriteAdapter? = null
 
     override fun onCreateView(
@@ -61,55 +59,11 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun setupActionListener() {
-        binding.btnMorePopular.setOnClickListener {
-            val bundle = bundleOf(
-                requireContext().getString(R.string.listing) to MovieSourceType.POPULAR
-            )
-            findNavController().navigate(R.id.desc_listing, bundle)
-        }
-        binding.btnMoreUpcoming.setOnClickListener {
-            val bundle = bundleOf(
-                requireContext().getString(R.string.listing) to MovieSourceType.UPCOMING
-            )
-            findNavController().navigate(R.id.desc_listing, bundle)
-        }
         binding.btnMoreFavourite.setOnClickListener {
             val bundle = bundleOf(
                 requireContext().getString(R.string.listing) to MovieSourceType.UPCOMING
             )
             findNavController().navigate(R.id.desc_listing, bundle)
-        }
-    }
-
-    private fun setupPopularAdapter() {
-        popularAdapter = MovieAdapter()
-
-        binding.rcvPopular.apply {
-            adapter = popularAdapter?.withLoadStateFooter(
-                footer = LoadingStateAdapter()
-            )
-        }
-
-        lifecycleScope.launch {
-            viewModel.getPopularPagingData().collect { last ->
-                popularAdapter?.submitData(last)
-            }
-        }
-    }
-
-    private fun setupUpcomingAdapter() {
-        upcomingAdapter = MovieAdapter()
-
-        binding.rcvUpcoming.apply {
-            adapter = upcomingAdapter?.withLoadStateFooter(
-                footer = LoadingStateAdapter()
-            )
-        }
-
-        lifecycleScope.launch {
-            viewModel.getUpcomingPagingData().collect { last ->
-                upcomingAdapter?.submitData(last)
-            }
         }
     }
 

@@ -3,23 +3,17 @@ package com.banyar.presentation.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.banyar.domain.model.MovieDetails
-import com.banyar.domain.paging.MovieSourceType
-import com.banyar.domain.usecase.BaseUseCase
+import com.banyar.domain.usecase.MoviesMediatorPD
 import com.banyar.presentation.databinding.ItemCategoryBinding
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class CategoryAdapter(
     val lifecycleScope: LifecycleCoroutineScope
-) : PagingDataAdapter<Pair<MovieSourceType, BaseUseCase<Any, Flow<PagingData<MovieDetails>>>>, CategoryAdapter.ViewHolder>(
-    DataDiffer
-) {
+) : PagingDataAdapter<MoviesMediatorPD, CategoryAdapter.ViewHolder>(DataDiffer) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val binding = ItemCategoryBinding.inflate(
@@ -36,9 +30,9 @@ class CategoryAdapter(
         private val binding: ItemCategoryBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(data: Pair<MovieSourceType, BaseUseCase<Any, Flow<PagingData<MovieDetails>>>>) {
+        fun bind(data: MoviesMediatorPD) {
             with(binding) {
-                txvTitle.text = data.first.toString()
+                txvTitle.text = data.type.toString()
 
                 val movieAdapter = MovieAdapter()
 
@@ -49,30 +43,24 @@ class CategoryAdapter(
                 }
 
                 lifecycleScope.launch {
-                    data.second(Any()).collect {
+                    data.pagingData.collect {
                         movieAdapter.submitData(it)
                     }
                 }
             }
         }
-
     }
 
-    object DataDiffer :
-        DiffUtil.ItemCallback<Pair<MovieSourceType, BaseUseCase<Any, Flow<PagingData<MovieDetails>>>>>() {
+    object DataDiffer : DiffUtil.ItemCallback<MoviesMediatorPD>() {
 
         override fun areItemsTheSame(
-            oldItem: Pair<MovieSourceType, BaseUseCase<Any, Flow<PagingData<MovieDetails>>>>,
-            newItem: Pair<MovieSourceType, BaseUseCase<Any, Flow<PagingData<MovieDetails>>>>
-        ): Boolean {
-            return oldItem.first == newItem.first
-        }
+            oldItem: MoviesMediatorPD,
+            newItem: MoviesMediatorPD
+        ) = oldItem.type.toString() == newItem.type.toString()
 
         override fun areContentsTheSame(
-            oldItem: Pair<MovieSourceType, BaseUseCase<Any, Flow<PagingData<MovieDetails>>>>,
-            newItem: Pair<MovieSourceType, BaseUseCase<Any, Flow<PagingData<MovieDetails>>>>
-        ): Boolean {
-            return oldItem == newItem
-        }
+            oldItem: MoviesMediatorPD,
+            newItem: MoviesMediatorPD
+        ) = oldItem == newItem
     }
 }

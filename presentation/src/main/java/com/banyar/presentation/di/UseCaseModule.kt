@@ -47,37 +47,12 @@ internal object UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideGetPopularMediatorUseCase(
-        remoteMoviesRepository: RemoteMoviesRepository,
-        localPaginatedMoviesRepository: LocalPaginatedMoviesRepository,
-        localRemoteKeyRepository: LocalRemoteKeyRepository,
-    ): GetPopularMediatorUC =
-        GetPopularMediatorUCImpl(
-            remoteMoviesRepository,
-            localPaginatedMoviesRepository,
-            localRemoteKeyRepository
-        )
-
-    @Provides
-    @Singleton
-    fun provideGetUpcomingMediatorUseCase(
-        remoteMoviesRepository: RemoteMoviesRepository,
-        localPaginatedMoviesRepository: LocalPaginatedMoviesRepository,
-        localRemoteKeyRepository: LocalRemoteKeyRepository,
-    ): GetUpcomingMediatorUC =
-        GetUpcomingMediatorUCImpl(
-            remoteMoviesRepository,
-            localPaginatedMoviesRepository,
-            localRemoteKeyRepository
-        )
-
-    @Provides
-    @Singleton
     fun provideGetCategoriesUseCase(
-        popularMediatorUC: GetPopularMediatorUC,
-        upcomingMediatorUC: GetUpcomingMediatorUC,
+        localPaginatedMoviesRepository: LocalPaginatedMoviesRepository,
+        localRemoteKeyRepository: LocalRemoteKeyRepository,
+        remoteMoviesRepository: RemoteMoviesRepository,
     ): GetCategoriesUC = GetCategoriesUCImpl(
-        popularMediatorUC, upcomingMediatorUC
+        localPaginatedMoviesRepository, localRemoteKeyRepository, remoteMoviesRepository
     )
 
 }

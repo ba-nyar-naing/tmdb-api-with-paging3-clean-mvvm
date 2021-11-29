@@ -1,42 +1,59 @@
 package com.banyar.domain.usecase
 
 import androidx.paging.*
-import com.banyar.domain.model.MovieDetails
+import com.banyar.domain.paging.BaseRemoteMediator
 import com.banyar.domain.paging.MovieSourceType
+import com.banyar.domain.paging.PagingUtility
+import com.banyar.domain.repository.LocalPaginatedMoviesRepository
+import com.banyar.domain.repository.LocalRemoteKeyRepository
+import com.banyar.domain.repository.RemoteMoviesRepository
 import kotlinx.coroutines.flow.Flow
 
+private val CATEGORIES = listOf(MovieSourceType.values())
+
 interface GetCategoriesUC :
-    BaseUseCase<Any, Flow<PagingData<Pair<MovieSourceType, BaseUseCase<Any, Flow<PagingData<MovieDetails>>>>>>>
+    BaseUseCase<Any, Flow<PagingData<MoviesMediatorPD>>>
 
 class GetCategoriesUCImpl(
-    private val popular: GetPopularMediatorUC,
-    private val upcoming: GetUpcomingMediatorUC,
+    private val localPaginatedMoviesRepository: LocalPaginatedMoviesRepository,
+    private val localRemoteKeyRepository: LocalRemoteKeyRepository,
+    private val remoteMoviesRepository: RemoteMoviesRepository,
 ) : GetCategoriesUC {
 
     override suspend fun invoke(params: Any) =
         Pager(
             config = PagingConfig(pageSize = 1, enablePlaceholders = false),
             pagingSourceFactory = {
-                CategoriesPagingSource(popular, upcoming)
+                CategoriesPagingSource(
+                    localPaginatedMoviesRepository,
+                    localRemoteKeyRepository,
+                    remoteMoviesRepository
+                )
             }
         ).flow
 }
 
 class CategoriesPagingSource(
-    private val popular: GetPopularMediatorUC,
-    private val upcoming: GetUpcomingMediatorUC,
-) : PagingSource<Int,
-        Pair<MovieSourceType, BaseUseCase<Any, Flow<PagingData<MovieDetails>>>>>() {
+    private val localPaginatedMoviesRepository: LocalPaginatedMoviesRepository,
+    private val localRemoteKeyRepository: LocalRemoteKeyRepository,
+    private val remoteMoviesRepository: RemoteMoviesRepository,
+) : PagingSource<Int, MoviesMediatorPD>() {
 
-    override fun getRefreshKey(state: PagingState<Int, Pair<MovieSourceType, BaseUseCase<Any, Flow<PagingData<MovieDetails>>>>>): Int? =
+    override fun getRefreshKey(state: PagingState<Int, MoviesMediatorPD>): Int? =
         state.anchorPosition
 
-    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, Pair<MovieSourceType, BaseUseCase<Any, Flow<PagingData<MovieDetails>>>>> {
-//        val categories = listOf(MovieSourceType.UPCOMING, MovieSourceType.POPULAR)
+    override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MoviesMediatorPD> {
         val response = listOf(
-            Pair(MovieSourceType.POPULAR, popular),
-            Pair(MovieSourceType.UPCOMING, upcoming)
+            PagingUtility.buildMoviesMediator(
+                MovieSourceType.UPCOMING,
+                localRemoteKeyRepository, localPaginatedMoviesRepository, remoteMoviesRepository
+            ),
+            PagingUtility.buildMoviesMediator(
+                MovieSourceType.POPULAR,
+                localRemoteKeyRepository, localPaginatedMoviesRepository, remoteMoviesRepository
+            )
         )
+
         return LoadResult.Page(
             data = response,
             prevKey = null,
