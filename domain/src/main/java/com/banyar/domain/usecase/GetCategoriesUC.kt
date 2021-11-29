@@ -46,13 +46,21 @@ class CategoriesPagingSource(
         val response = listOf(
             PagingUtility.buildFavouriteMoviesMediator(localPaginatedMoviesRepository),
             PagingUtility.buildMoviesMediator(
+                MovieSourceType.POPULAR,
+                localRemoteKeyRepository, localPaginatedMoviesRepository, remoteMoviesRepository
+            ),
+            PagingUtility.buildMoviesMediator(
                 MovieSourceType.UPCOMING,
                 localRemoteKeyRepository, localPaginatedMoviesRepository, remoteMoviesRepository
             ),
             PagingUtility.buildMoviesMediator(
-                MovieSourceType.POPULAR,
+                MovieSourceType.TOP_RATED,
                 localRemoteKeyRepository, localPaginatedMoviesRepository, remoteMoviesRepository
-            )
+            ),
+            PagingUtility.buildMoviesMediator(
+                MovieSourceType.NOW_PLAYING,
+                localRemoteKeyRepository, localPaginatedMoviesRepository, remoteMoviesRepository
+            ),
         )
 
         return LoadResult.Page(

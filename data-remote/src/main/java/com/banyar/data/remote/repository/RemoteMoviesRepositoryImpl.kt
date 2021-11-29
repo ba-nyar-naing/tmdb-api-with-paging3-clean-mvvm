@@ -21,13 +21,21 @@ class RemoteMoviesRepositoryImpl @Inject constructor(
 
     override fun getPopularMovies(page: Int): Flow<PopularMovies> = flow {
         val response = tmdbService.getPopular(page)
-        val popularMovies = response.toDomain()
-        emit(popularMovies)
+        emit(response.toDomain())
     }
 
     override fun getUpcomingMovies(page: Int): Flow<PopularMovies> = flow {
         val response = tmdbService.getUpcoming(page)
-        val popularMovies = response.toDomain()
-        emit(popularMovies)
+        emit(response.toDomain())
+    }
+
+    override fun getTopRatedMovies(page: Int): Flow<PopularMovies> = flow {
+        val response = tmdbService.getTopRated(page)
+        emit(response.toDomain())
+    }
+
+    override fun getNowPlayingMovies(page: Int): Flow<PopularMovies> = flow {
+        val response = tmdbService.getNowPlaying(page)
+        emit(response.toDomain())
     }
 }

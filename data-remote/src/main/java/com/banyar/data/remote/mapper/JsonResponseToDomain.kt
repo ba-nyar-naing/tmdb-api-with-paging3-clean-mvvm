@@ -2,7 +2,7 @@ package com.banyar.data.remote.mapper
 
 import com.banyar.data.remote.model.GenreResponse
 import com.banyar.data.remote.model.MovieDetailsResponse
-import com.banyar.data.remote.model.PopularResponse
+import com.banyar.data.remote.model.MovieListResponse
 import com.banyar.domain.model.Genre
 import com.banyar.domain.model.MovieDetails
 import com.banyar.domain.model.PopularMovies
@@ -37,7 +37,7 @@ internal fun MovieDetailsResponse.toDomain(): MovieDetails {
     )
 }
 
-internal fun PopularResponse.toDomain(): PopularMovies {
+internal fun MovieListResponse.toDomain(): PopularMovies {
     return PopularMovies(
         page,
         results.map { movie -> movie.toDomain() },

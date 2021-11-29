@@ -97,9 +97,9 @@ abstract class BaseRemoteMediator(
         val response = when (movieSourceType) {
             MovieSourceType.POPULAR -> remoteMoviesRepository.getPopularMovies(page)
             MovieSourceType.UPCOMING -> remoteMoviesRepository.getUpcomingMovies(page)
-            else -> {
-                remoteMoviesRepository.getPopularMovies(page)
-            }
+            MovieSourceType.TOP_RATED -> remoteMoviesRepository.getTopRatedMovies(page)
+            MovieSourceType.NOW_PLAYING -> remoteMoviesRepository.getNowPlayingMovies(page)
+            else -> remoteMoviesRepository.getNowPlayingMovies(page)
         }.first()
         return response.movies
     }

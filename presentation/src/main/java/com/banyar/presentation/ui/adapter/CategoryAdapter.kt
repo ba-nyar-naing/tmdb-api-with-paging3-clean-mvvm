@@ -1,5 +1,6 @@
 package com.banyar.presentation.ui.adapter
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
@@ -34,9 +35,10 @@ class CategoryAdapter(
         private val binding: ItemCategoryBinding,
     ) : RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(data: MoviesMediatorPD) {
             with(binding) {
-                txvTitle.text = data.type.toString()
+                txvTitle.text = "${data.type.title} movies"
 
                 val movieAdapter = MovieAdapter()
                 binding.rcvMovies.apply {

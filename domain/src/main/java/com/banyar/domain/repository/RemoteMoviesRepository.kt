@@ -11,4 +11,8 @@ interface RemoteMoviesRepository {
     fun getPopularMovies(page: Int): Flow<PopularMovies>
 
     fun getUpcomingMovies(page: Int): Flow<PopularMovies>
+
+    fun getTopRatedMovies(page: Int): Flow<PopularMovies>
+
+    fun getNowPlayingMovies(page: Int): Flow<PopularMovies>
 }
