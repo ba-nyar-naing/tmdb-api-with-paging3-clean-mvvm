@@ -44,6 +44,7 @@ class CategoriesPagingSource(
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, MoviesMediatorPD> {
         val response = listOf(
+            PagingUtility.buildFavouriteMoviesMediator(localPaginatedMoviesRepository),
             PagingUtility.buildMoviesMediator(
                 MovieSourceType.UPCOMING,
                 localRemoteKeyRepository, localPaginatedMoviesRepository, remoteMoviesRepository

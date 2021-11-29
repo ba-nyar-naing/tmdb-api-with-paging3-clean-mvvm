@@ -10,5 +10,6 @@ data class PaginatedMovieEntity(
     @ColumnInfo(name = "poster_path") val posterPath: String,
     @ColumnInfo(name = "movie_id") val movieId: Int,
     @ColumnInfo(name = "category") val category: String,
+    @ColumnInfo(name = "updated_at") val updatedAt: String,
     @PrimaryKey(autoGenerate = true) @ColumnInfo(name = "paging_id") val pagingId: Int = 0,
 )

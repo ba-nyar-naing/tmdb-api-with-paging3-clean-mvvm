@@ -1,6 +1,5 @@
 package com.banyar.presentation.di
 
-import com.banyar.domain.repository.LocalFavouritesRepository
 import com.banyar.domain.repository.LocalPaginatedMoviesRepository
 import com.banyar.domain.repository.LocalRemoteKeyRepository
 import com.banyar.domain.repository.RemoteMoviesRepository
@@ -18,26 +17,20 @@ internal object UseCaseModule {
     @Provides
     @Singleton
     fun provideDeleteFavouriteUseCase(
-        repository: LocalFavouritesRepository
+        repository: LocalPaginatedMoviesRepository
     ): DeleteFavouriteUC = DeleteFavouriteUCImpl(repository)
 
     @Provides
     @Singleton
     fun provideInsertFavouriteUseCase(
-        repository: LocalFavouritesRepository
+        repository: LocalPaginatedMoviesRepository
     ): InsertFavouriteUC = InsertFavouriteUCImpl(repository)
 
     @Provides
     @Singleton
     fun provideGetFavouriteStatUseCase(
-        repository: LocalFavouritesRepository
+        repository: LocalPaginatedMoviesRepository
     ): GetFavouriteStatUC = GetFavouriteStatUCImpl(repository)
-
-    @Provides
-    @Singleton
-    fun provideGetFavouritesUseCase(
-        repository: LocalFavouritesRepository
-    ): GetFavouritesUC = GetFavouritesUCImpl(repository)
 
     @Provides
     @Singleton

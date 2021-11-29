@@ -3,7 +3,6 @@ package com.banyar.presentation.di
 import android.content.Context
 import androidx.room.Room
 import com.banyar.data.local.TMDBDatabase
-import com.banyar.data.local.dao.FavouriteDAO
 import com.banyar.data.local.dao.PaginatedMovieDAO
 import com.banyar.data.local.dao.RemoteKeyDAO
 import dagger.Module
@@ -24,10 +23,6 @@ internal object DatabaseModule {
     ): TMDBDatabase = Room
         .databaseBuilder(context, TMDBDatabase::class.java, "tmdb")
         .build()
-
-    @Provides
-    @Singleton
-    fun provideFavouriteDao(db: TMDBDatabase): FavouriteDAO = db.favouriteDao()
 
     @Provides
     @Singleton

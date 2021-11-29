@@ -84,7 +84,7 @@ abstract class BaseRemoteMediator(
             }
 
             localRemoteKeyRepository.insertAll(movieSourceType, remoteKeys).first()
-            localPaginatedMoviesRepository.insertAll(movieSourceType, movies).first()
+            localPaginatedMoviesRepository.insertAll(movies).first()
             return MediatorResult.Success(endOfPaginationReached = endOfPaginationReached)
         } catch (exception: IOException) {
             return MediatorResult.Error(exception)
@@ -97,6 +97,9 @@ abstract class BaseRemoteMediator(
         val response = when (movieSourceType) {
             MovieSourceType.POPULAR -> remoteMoviesRepository.getPopularMovies(page)
             MovieSourceType.UPCOMING -> remoteMoviesRepository.getUpcomingMovies(page)
+            else -> {
+                remoteMoviesRepository.getPopularMovies(page)
+            }
         }.first()
         return response.movies
     }

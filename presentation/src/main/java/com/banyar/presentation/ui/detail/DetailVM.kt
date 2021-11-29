@@ -4,7 +4,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.banyar.domain.model.MovieDetails
 import com.banyar.domain.model.Result
-import com.banyar.domain.model.toFavourite
+import com.banyar.domain.paging.MovieSourceType
 import com.banyar.domain.usecase.DeleteFavouriteUC
 import com.banyar.domain.usecase.GetDetailsUC
 import com.banyar.domain.usecase.GetFavouriteStatUC
@@ -53,7 +53,8 @@ class DetailVM @Inject constructor(
     fun insertFavourite() {
         viewModelScope.launch {
             val movieDetails = movieDetails.value ?: return@launch
-            insertFavouriteUC(movieDetails.toFavourite()).collect { result ->
+            movieDetails.category = MovieSourceType.FAVOURITE.toString()
+            insertFavouriteUC(movieDetails).collect { result ->
                 when (result) {
                     Result.SUCCESS -> uiState.postValue(DetailUIState.ShowDeleteFavourite)
                     Result.FAILURE -> uiState.postValue(DetailUIState.FavouriteSaveFailed)

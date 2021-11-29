@@ -28,10 +28,3 @@ data class MovieDetails(
     @ColumnInfo(name = "category") var category: String? = null,
     @ColumnInfo(name = "paging_id") var pagingId: Int? = null,
 )
-
-fun MovieDetails.toFavourite() = Favourite(
-    id!!,
-    title!!,
-    posterPath!!,
-    System.currentTimeMillis().toString()
-)

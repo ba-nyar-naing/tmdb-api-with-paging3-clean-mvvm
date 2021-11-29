@@ -4,17 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
-import com.banyar.domain.paging.MovieSourceType
-import com.banyar.presentation.R
 import com.banyar.presentation.databinding.FragmentHomeBinding
 import com.banyar.presentation.ui.adapter.CategoryAdapter
-import com.banyar.presentation.ui.adapter.FavouriteAdapter
 import com.banyar.presentation.ui.adapter.LoadingStateAdapter
-import com.banyar.presentation.ui.adapter.MovieAdapter
 import com.banyar.presentation.ui.base.BaseFragment
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -27,7 +21,6 @@ class HomeFragment : BaseFragment() {
     private val viewModel: HomeVM by viewModels()
 
     private var categoryAdapter: CategoryAdapter? = null
-    private var favouriteAdapter: FavouriteAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,16 +35,8 @@ class HomeFragment : BaseFragment() {
         super.onDestroyView()
     }
 
-    override fun onResume() {
-        super.onResume()
-        setupFavouriteAdapter()
-    }
-
     override fun setupUIElements() {
         setActionBarTitle("Home")
-
-//        setupPopularAdapter()
-//        setupUpcomingAdapter()
         setupCategoryAdapter()
     }
 
@@ -59,28 +44,7 @@ class HomeFragment : BaseFragment() {
     }
 
     override fun setupActionListener() {
-        binding.btnMoreFavourite.setOnClickListener {
-            val bundle = bundleOf(
-                requireContext().getString(R.string.listing) to MovieSourceType.UPCOMING
-            )
-            findNavController().navigate(R.id.desc_listing, bundle)
-        }
-    }
 
-    private fun setupFavouriteAdapter() {
-        favouriteAdapter = FavouriteAdapter()
-
-        binding.rcvFavourite.apply {
-            adapter = favouriteAdapter?.withLoadStateFooter(
-                footer = LoadingStateAdapter()
-            )
-        }
-
-        lifecycleScope.launch {
-            viewModel.getFavouritePagingData().collect { last ->
-                favouriteAdapter?.submitData(last)
-            }
-        }
     }
 
     private fun setupCategoryAdapter() {
